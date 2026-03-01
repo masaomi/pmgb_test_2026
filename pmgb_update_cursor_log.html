@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor Build Log - PMGB Redesign</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #f5f5f0; color: #2d2d2d; line-height: 1.7; }
+    .top-bar { background: #3D3229; padding: 12px 24px; }
+    .top-bar a { color: rgba(255,255,255,0.7); font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .top-bar a:hover { color: #D4A574; }
+    .page-header { background: linear-gradient(135deg, #3D3229 0%, #5A4A3A 100%); color: #fff; padding: 48px 24px; text-align: center; }
+    .page-header h1 { font-size: clamp(22px, 3.5vw, 32px); font-weight: 700; margin-bottom: 8px; }
+    .page-header h1 span { color: #D4A574; }
+    .page-header .subtitle { font-size: 14px; color: rgba(255,255,255,0.6); }
+    .page-header .tool-badge { display: inline-block; margin-top: 12px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); padding: 4px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); letter-spacing: 0.5px; }
+    .content { max-width: 860px; margin: 0 auto; padding: 40px 20px 80px; }
+    .content h1 { font-size: 28px; font-weight: 700; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #e0d8ce; color: #3D3229; }
+    .content h2 { font-size: 22px; font-weight: 700; margin: 40px 0 12px; color: #3D3229; }
+    .content h3 { font-size: 17px; font-weight: 600; margin: 28px 0 10px; color: #4a4a4a; }
+    .content h4 { font-size: 15px; font-weight: 600; margin: 20px 0 8px; color: #4a4a4a; }
+    .content p { margin: 10px 0; font-size: 15px; }
+    .content ul, .content ol { margin: 10px 0 10px 24px; font-size: 15px; }
+    .content li { margin: 4px 0; }
+    .content a { color: #8B7355; text-decoration: underline; text-underline-offset: 2px; }
+    .content a:hover { color: #6F5B42; }
+    .content hr { border: none; border-top: 1px solid #e0d8ce; margin: 32px 0; }
+    .content blockquote { border-left: 3px solid #D4A574; padding: 12px 20px; margin: 16px 0; background: #faf8f5; border-radius: 0 6px 6px 0; font-style: italic; color: #5a5a5a; }
+    .content strong { font-weight: 600; color: #3D3229; }
+    .content em { font-style: italic; color: #666; }
+    .content code { font-family: 'JetBrains Mono', monospace; font-size: 13px; background: #f0ebe4; padding: 2px 6px; border-radius: 3px; color: #8B7355; }
+    .content pre { background: #2d2d2d; color: #e0e0e0; padding: 20px; border-radius: 8px; overflow-x: auto; margin: 16px 0; font-size: 13px; line-height: 1.5; }
+    .content pre code { background: none; padding: 0; color: inherit; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+    thead { background: #f0ebe4; }
+    th { text-align: left; padding: 10px 14px; font-weight: 600; color: #3D3229; border-bottom: 2px solid #e0d8ce; }
+    td { padding: 10px 14px; border-bottom: 1px solid #ede8e2; color: #4a4a4a; }
+    tr:hover td { background: #faf8f5; }
+    .chat-user, .chat-assistant { padding: 20px; border-radius: 10px; margin: 16px 0; }
+    .chat-user { background: #e8f0e8; border-left: 4px solid #6a9f6a; }
+    .chat-assistant { background: #faf8f5; border-left: 4px solid #D4A574; }
+    .chat-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .chat-user .chat-label { color: #4a7a4a; }
+    .chat-assistant .chat-label { color: #8B7355; }
+    @media (max-width: 640px) { .content { padding: 24px 16px 60px; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+  </style>
+</head>
+<body>
+
+<div class="top-bar"><a href="index.html">&larr; Back to Index</a></div>
+
+<div class="page-header">
+  <h1><span>Cursor Build Log</span> - PMGB Redesign</h1>
+  <div class="subtitle">Exported on 01/03/2026 at 8:15:23 CET</div>
+  <div class="tool-badge">Cursor 2.5.26</div>
+</div>
+
+<div class="content">
+
+  <h1>ウェブサイト機能の分析</h1>
+
+  <p><em>Exported on 01/03/2026 at 8:15:23 CET from Cursor (2.5.26)</em></p>
+
+  <hr>
+
+  <!-- Chat Turn 1: User -->
+  <div class="chat-user">
+    <div class="chat-label">User</div>
+    <p><a href="https://www.pmgb.net/">https://www.pmgb.net/</a></p>
+    <p>のwebサイトがあります。</p>
+    <p>このサイトと同じような機能を持つサイトを作れますか？<br>どんな機能が必要か洗い出してください。</p>
+  </div>
+
+  <hr>
+
+  <!-- Chat Turn 1: Cursor -->
+  <div class="chat-assistant">
+    <div class="chat-label">Cursor</div>
+    <p>サイトの内容を詳しく確認します。</p>
+    <p>サイトの構造を十分に把握しました。詳細な機能分析をお伝えします。</p>
+  </div>
+
+  <hr>
+
+  <h1>PMGB.net 同等サイトの機能要件一覧</h1>
+
+  <h2>サイト概要</h2>
+
+  <p><strong>Petit mignon Grand beau</strong>は、フランス・ブルターニュから日本向けにフレンチアンティーク雑貨を販売するECサイトです。規模は中小ですが、海外発送・独自ルールなど独特な特徴があります。</p>
+
+  <hr>
+
+  <h2>必要機能の全体像</h2>
+
+  <h3>1. 商品管理（Product Management）</h3>
+
+  <table>
+    <thead>
+      <tr><th>機能</th><th>詳細</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>商品登録</td><td>商品名・説明・価格・カテゴリ・商品番号（例: K260024）・年代・製造元</td></tr>
+      <tr><td>画像管理</td><td>複数枚画像アップロード、クリックで拡大表示</td></tr>
+      <tr><td>在庫管理</td><td>1点モノが多いため「在庫数 = 1」が基本、SOLD表示</td></tr>
+      <tr><td>カテゴリ分類</td><td>食器類・調理器具・家具・小物類・ソーイング雑貨・ボタン・紙製品・おもちゃ・アクセサリー・鍵・セール品</td></tr>
+      <tr><td>NEW/SOLD バッジ</td><td>新着・売り切れのビジュアル表示</td></tr>
+      <tr><td>商品番号体系</td><td>カテゴリ+年+連番（例: K260024）</td></tr>
+      <tr><td>状態評価</td><td>ダメージ・貫入(かんにゅう)などアンティーク特有の状態表記</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h3>2. 商品一覧・検索（Catalog &amp; Search）</h3>
+
+  <table>
+    <thead>
+      <tr><th>機能</th><th>詳細</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>カテゴリ別一覧</td><td>カテゴリページに商品をグリッド表示</td></tr>
+      <tr><td>全商品一覧</td><td>ページネーション（10ページ以上に分割）</td></tr>
+      <tr><td>NEW商品一覧</td><td>トップページに最新入荷を優先表示</td></tr>
+      <tr><td>セール品ページ</td><td>割引商品のまとめページ（50%引きなど）</td></tr>
+      <tr><td>SOLD商品アーカイブ</td><td>過去に売れた商品の閲覧（参考・ポートフォリオとして）</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h3>3. ショッピングカート（Cart）</h3>
+
+  <table>
+    <thead>
+      <tr><th>機能</th><th>詳細</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>カート追加・削除</td><td>ボタン1クリックでカートへ</td></tr>
+      <tr><td><strong>60分タイムアウト仮押さえ</strong></td><td>カート追加後60分間、他ユーザーから商品をブロック（アンティーク1点モノ向け重要機能）</td></tr>
+      <tr><td>先着優先制</td><td>同時注文は「確定」が早い方を優先</td></tr>
+      <tr><td>注文フォーム</td><td>氏名・住所・配達方法選択・備考欄（格安宅配便希望など）</td></tr>
+      <tr><td>自動返信メール</td><td>注文完了時に注文内容メール送信</td></tr>
+      <tr><td>Cookie対応</td><td>カート情報の一時保存</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h3>4. 決済（Payment）</h3>
+
+  <table>
+    <thead>
+      <tr><th>機能</th><th>詳細</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>PayPal決済</td><td>PayPal経由でのカード・残高払い</td></tr>
+      <tr><td>WISE送金</td><td>銀行振り込み代替手段としてWISE対応</td></tr>
+      <tr><td>送料別途計算</td><td>梱包後に重量計測して送料をメールで連絡（自動計算なし）</td></tr>
+      <tr><td>発注確定後10日以内入金</td><td>未入金でキャンセル自動処理</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h3>5. 送料計算・配送管理（Shipping）</h3>
+
+  <table>
+    <thead>
+      <tr><th>機能</th><th>詳細</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>配送方法選択</td><td>補償あり/なし・追跡あり/なし・航空便・格安宅配便</td></tr>
+      <tr><td>為替レート表示</td><td>毎月更新（例: @&yen;189.488/&euro;）</td></tr>
+      <tr><td>送料テーブル管理</td><td>管理者が送料を手動で更新・表示</td></tr>
+      <tr><td>発送通知メール</td><td>発送後に追跡番号付きメール送信</td></tr>
+      <tr><td>国際配送向け注意書き</td><td>紛失・遅延・関税説明ページ</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h3>6. ユーザーアカウント（Customer Accounts）</h3>
+
+  <table>
+    <thead>
+      <tr><th>機能</th><th>詳細</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>住所登録・管理</td><td>次回注文時に再入力不要</td></tr>
+      <tr><td>注文履歴</td><td>過去注文の確認</td></tr>
+      <tr><td>メルマガ登録/解除</td><td>更新通知メールの管理</td></tr>
+      <tr><td>卸売り顧客区分</td><td>一般客と販売店（卸）を区別・掛け率適用</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h3>7. コンテンツ管理（CMS）</h3>
+
+  <table>
+    <thead>
+      <tr><th>機能</th><th>詳細</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>静的ページ管理</td><td>ご利用案内・会社概要・哲学・よくある質問</td></tr>
+      <tr><td>お知らせ・更新日管理</td><td>「次回更新予定日」のトップページ表示</td></tr>
+      <tr><td>コラム/TIPページ</td><td>カフェオレボウルの秘密などの読み物コンテンツ</td></tr>
+      <tr><td>外部ブログ連携</td><td>FC2ブログへのリンク・埋め込み</td></tr>
+      <tr><td>YouTube動画埋め込み</td><td>仕入れ動画の表示</td></tr>
+      <tr><td>SNS連携</td><td>Instagram・Facebook リンク</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h3>8. コミュニティ・顧客エンゲージメント</h3>
+
+  <table>
+    <thead>
+      <tr><th>機能</th><th>詳細</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>口コミ掲示板（BBS）</td><td>顧客レビュー・評価の書き込み（現在はCGI掲示板）</td></tr>
+      <tr><td>お問い合わせフォーム</td><td>メールフォーム（CGI postmail相当）</td></tr>
+      <tr><td>リンク切れ報告フォーム</td><td>ユーザーが壊れたリンクを報告</td></tr>
+      <tr><td>FAQ</td><td>よくある質問ページ</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h3>9. 管理者機能（Admin）</h3>
+
+  <table>
+    <thead>
+      <tr><th>機能</th><th>詳細</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>商品追加・編集・削除</td><td>管理画面からの商品管理</td></tr>
+      <tr><td>SOLD切り替え</td><td>売れたら即座にSOLDへ変更</td></tr>
+      <tr><td>注文管理</td><td>受注一覧・入金確認・発送処理</td></tr>
+      <tr><td>為替レート更新</td><td>月次で日本円レート更新</td></tr>
+      <tr><td>メルマガ配信</td><td>更新通知メールの一括送信</td></tr>
+      <tr><td>卸掛け率設定</td><td>販売店別の割引率管理</td></tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>技術スタック案（モダンな実装として）</h2>
+
+  <pre><code>フロントエンド: Next.js (React)
+バックエンド: Rails 8 API または Next.js API Routes
+DB: PostgreSQL
+決済: PayPal SDK + Stripe (PayPal代替として)
+メール: SendGrid / Resend
+画像: Cloudinary / AWS S3
+ホスティング: Vercel + Render / Railway</code></pre>
+
+  <hr>
+
+  <h2>PMGBサイト特有の重要機能（見落としやすいポイント）</h2>
+
+  <ol>
+    <li><strong>60分仮押さえシステム</strong> &mdash; 1点モノのアンティーク向けに必須。Redis等でタイマー管理</li>
+    <li><strong>送料後計算フロー</strong> &mdash; 注文時に送料確定しない独自フロー（重量依存）</li>
+    <li><strong>SOLD商品アーカイブ</strong> &mdash; 売り切れでも商品ページを残す（信頼性・実績表示）</li>
+    <li><strong>卸売り顧客の二重価格</strong> &mdash; 同じ商品を一般価格と卸価格で管理</li>
+    <li><strong>海外発送特有の免責説明</strong> &mdash; 関税・破損・紛失の説明ページ群</li>
+    <li><strong>隔週更新サイクル</strong> &mdash; 次回更新予定日表示、一括新着追加のワークフロー</li>
+  </ol>
+
+  <hr>
+
+  <p>このサイトと同等のものは<strong>作れます</strong>。現在のPMGBはレガシーなCGI+静的HTMLで構築されていますが、モダンなスタックで全機能を再現可能です。</p>
+
+  <p>どのスタックやフレームワークを使うか、また特定の機能から優先的に作り始めるかによって難易度・工数が変わります。何か特定の部分（ECカート、管理画面、決済など）から詳しく掘り下げましょうか？</p>
+
+  <hr>
+
+  <!-- Chat Turn 2: User -->
+  <div class="chat-user">
+    <div class="chat-label">User</div>
+    <p>裏側のシステムは変えようがないのですが、とりあえずHTMLとJavascriptのみでこのページだけどんなふうに作り変えることができるか見せるために作り替えてみることはできますか？</p>
+  </div>
+
+  <hr>
+
+  <!-- Chat Turn 2: Cursor -->
+  <div class="chat-assistant">
+    <div class="chat-label">Cursor</div>
+    <p>どのページを作り替えるか確認してから始めます。まずトップページの構造をもう少し詳しく確認します。</p>
+    <p>内容を十分把握できました。それではトップページをモダンなデザインに作り替えます。商品データはトップページから取得した実際のデータをそのまま使います。</p>
+    <p>空のフォルダですね。では <code>index.html</code> を作成します。</p>
+    <p><code>/Users/masa/Desktop/pmgb/index.html</code> を作成しました。ブラウザで直接開けます。</p>
+  </div>
+
+  <hr>
+
+  <h2>実装した内容</h2>
+
+  <h3>デザイン面</h3>
+  <ul>
+    <li><strong>ウォームブラウン系のカラーパレット</strong>でフレンチアンティークの雰囲気を表現</li>
+    <li>レスポンシブ対応（モバイル・タブレット・PC）</li>
+    <li>ホバーアニメーション、滑らかなトランジション</li>
+  </ul>
+
+  <h3>機能面</h3>
+
+  <table>
+    <thead>
+      <tr><th>機能</th><th>詳細</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>カテゴリフィルター</strong></td><td>ボタンクリックで即時絞り込み（アクセサリー・食器・家具など）</td></tr>
+      <tr><td><strong>商品グリッド</strong></td><td>トップページの実際の50商品データを全て収録</td></tr>
+      <tr><td><strong>NEW / SOLD バッジ</strong></td><td>状態を視覚的に表示、SOLD商品は半透明</td></tr>
+      <tr><td><strong>商品詳細モーダル</strong></td><td>カードクリックで詳細ポップアップ（サイズ・重さ・状態・説明）</td></tr>
+      <tr><td><strong>ショッピングカート</strong></td><td>サイドドロワー形式、<code>localStorage</code>で状態を保持</td></tr>
+      <tr><td><strong>ページネーション</strong></td><td>24件ずつ表示</td></tr>
+      <tr><td><strong>サイドバー</strong></td><td>更新スケジュール・為替レート・お支払い・リンク集</td></tr>
+      <tr><td><strong>ヘッダー</strong></td><td>スティッキー固定、カートアイコン（件数バッジ付き）</td></tr>
+      <tr><td><strong>ハンバーガーメニュー</strong></td><td>モバイル時に折りたたみナビ</td></tr>
+      <tr><td><strong>トースト通知</strong></td><td>カート追加時に画面右下に通知</td></tr>
+    </tbody>
+  </table>
+
+  <h3>元サイトとの違い・注意点</h3>
+  <ul>
+    <li>商品画像は実際のサイトから取得できないため、カテゴリ絵文字のプレースホルダー表示</li>
+    <li>カート→注文手続きは実際のpmgb.netのシステムに委ねる形（alertで案内）</li>
+    <li>外部リンクはすべて本家pmgb.netに繋いでいます</li>
+  </ul>
+
+</div>
+
+</body>
+</html>

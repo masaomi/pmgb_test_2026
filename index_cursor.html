@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Petit mignon Grand beau | フレンチアンティーク</title>
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #faf6f0;
+      --ivory:    #f5ede0;
+      --warm:     #e8d5bc;
+      --brown:    #8b6347;
+      --dark:     #3d2b1f;
+      --accent:   #c0392b;
+      --sold:     #999;
+      --new-bg:   #e8f4e8;
+      --new-text: #2d6a2d;
+      --radius:   8px;
+      --shadow:   0 2px 12px rgba(61,43,31,.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+      background: var(--cream);
+      color: var(--dark);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    a { color: var(--brown); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ===== Header ===== */
+    .site-header {
+      background: var(--dark);
+      color: var(--cream);
+      padding: 0 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.3);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      gap: 1rem;
+    }
+
+    .site-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .site-logo .logo-en {
+      font-size: 15px;
+      font-style: italic;
+      letter-spacing: .5px;
+      color: var(--warm);
+    }
+    .site-logo .logo-ja {
+      font-size: 10px;
+      color: #bbb;
+    }
+
+    .header-nav {
+      display: flex;
+      gap: .2rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .header-nav a {
+      color: #ccc;
+      font-size: 11.5px;
+      padding: .3rem .5rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      transition: background .2s, color .2s;
+    }
+    .header-nav a:hover {
+      background: var(--brown);
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* hamburger (mobile) */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: .4rem;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: #ccc;
+      border-radius: 2px;
+      transition: .3s;
+    }
+
+    /* ===== Hero Banner ===== */
+    .hero {
+      background: linear-gradient(135deg, #4a3020 0%, #7a5234 50%, #4a3020 100%);
+      color: var(--cream);
+      text-align: center;
+      padding: 3rem 1.5rem 2.5rem;
+    }
+    .hero-title {
+      font-size: clamp(22px, 4vw, 38px);
+      font-style: italic;
+      letter-spacing: 1px;
+      margin-bottom: .5rem;
+    }
+    .hero-subtitle {
+      font-size: 13px;
+      color: var(--warm);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 12.5px;
+      color: var(--warm);
+    }
+    .hero-meta-item {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius);
+      padding: .5rem 1rem;
+    }
+    .hero-meta-item strong { color: #fff; display: block; font-size: 13px; }
+
+    /* ===== Category Nav ===== */
+    .category-bar {
+      background: var(--ivory);
+      border-bottom: 1px solid var(--warm);
+      padding: .6rem 1.5rem;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+    .category-bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      gap: .4rem;
+      align-items: center;
+    }
+    .cat-label { font-size: 11px; color: var(--brown); margin-right: .3rem; }
+    .cat-btn {
+      display: inline-block;
+      padding: .35rem .85rem;
+      border-radius: 20px;
+      font-size: 12.5px;
+      background: #fff;
+      border: 1px solid var(--warm);
+      cursor: pointer;
+      transition: background .2s, border-color .2s, color .2s;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+    .cat-btn:hover, .cat-btn.active {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: #fff;
+    }
+    .cat-btn.sale { border-color: var(--accent); color: var(--accent); }
+    .cat-btn.sale:hover, .cat-btn.sale.active {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+
+    /* ===== Notice Bar ===== */
+    .notice-bar {
+      background: #fff8e1;
+      border-top: 2px solid #f0c040;
+      border-bottom: 1px solid #f0e090;
+      padding: .5rem 1.5rem;
+    }
+    .notice-bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: 12.5px;
+      color: #5a4a00;
+    }
+    .notice-bar-inner a { color: #8a6000; font-weight: bold; }
+
+    /* ===== Main Layout ===== */
+    .main-wrap {
+      max-width: 1100px;
+      margin: 1.5rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* ===== Sidebar ===== */
+    .sidebar { display: flex; flex-direction: column; gap: 1rem; }
+
+    .sidebar-card {
+      background: #fff;
+      border: 1px solid var(--warm);
+      border-radius: var(--radius);
+      padding: 1rem;
+      box-shadow: var(--shadow);
+    }
+    .sidebar-card h3 {
+      font-size: 12px;
+      font-weight: bold;
+      color: var(--brown);
+      border-bottom: 1px solid var(--warm);
+      padding-bottom: .4rem;
+      margin-bottom: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .sidebar-card p { font-size: 12px; color: #555; line-height: 1.6; }
+
+    .update-schedule { font-size: 12px; }
+    .update-schedule .next-date {
+      background: var(--ivory);
+      border-left: 3px solid var(--brown);
+      padding: .4rem .6rem;
+      margin: .4rem 0;
+      font-size: 13px;
+      font-weight: bold;
+      color: var(--dark);
+    }
+    .update-schedule .holiday { color: #888; font-size: 11.5px; }
+
+    .exchange-rate {
+      font-size: 13px;
+      text-align: center;
+    }
+    .exchange-rate .rate-num {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--brown);
+      display: block;
+      margin: .3rem 0;
+    }
+    .exchange-rate .rate-note { font-size: 11px; color: #888; }
+
+    .payment-icons { display: flex; flex-direction: column; gap: .4rem; }
+    .payment-icon-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: 12px;
+      background: var(--ivory);
+      border-radius: 5px;
+      padding: .35rem .6rem;
+    }
+    .payment-icon-item .icon { font-size: 16px; }
+
+    .sidebar-links { list-style: none; }
+    .sidebar-links li {
+      border-bottom: 1px solid var(--ivory);
+    }
+    .sidebar-links li:last-child { border-bottom: none; }
+    .sidebar-links a {
+      display: block;
+      padding: .35rem .1rem;
+      font-size: 12px;
+      color: var(--brown);
+      transition: padding-left .15s;
+    }
+    .sidebar-links a:hover { padding-left: .4rem; text-decoration: none; }
+
+    /* ===== Product Grid ===== */
+    .content-area {}
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: var(--brown);
+      border-radius: 2px;
+    }
+    .section-title .count { font-size: 12px; color: #888; font-weight: normal; }
+    .view-all-link { font-size: 12.5px; color: var(--brown); }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    /* ===== Product Card ===== */
+    .product-card {
+      background: #fff;
+      border: 1px solid var(--warm);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+      cursor: pointer;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(61,43,31,.15);
+    }
+    .product-card.is-sold { opacity: .62; }
+    .product-card.is-sold:hover { transform: none; }
+
+    .product-img-wrap {
+      aspect-ratio: 1;
+      background: var(--ivory);
+      overflow: hidden;
+      position: relative;
+    }
+    .product-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .3s;
+    }
+    .product-card:hover .product-img-wrap img { transform: scale(1.04); }
+
+    /* placeholder when no image */
+    .product-img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #bbb;
+      gap: .3rem;
+    }
+    .product-img-placeholder .ph-icon { font-size: 36px; }
+    .product-img-placeholder .ph-text { font-size: 10px; }
+
+    .badge-row {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 10px;
+      font-weight: bold;
+      padding: 2px 7px;
+      border-radius: 3px;
+      line-height: 1.4;
+    }
+    .badge-new { background: var(--new-bg); color: var(--new-text); border: 1px solid #9ecf9e; }
+    .badge-sold { background: #555; color: #fff; }
+    .badge-sale { background: var(--accent); color: #fff; }
+
+    .product-info {
+      padding: .65rem .75rem .75rem;
+    }
+    .product-name {
+      font-size: 12px;
+      line-height: 1.5;
+      margin-bottom: .35rem;
+      color: var(--dark);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .product-id { font-size: 10px; color: #aaa; margin-bottom: .25rem; }
+    .product-price {
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--brown);
+    }
+    .product-price.sold-price { color: var(--sold); text-decoration: line-through; font-size: 13px; }
+    .product-weight { font-size: 10.5px; color: #999; margin-top: .2rem; }
+
+    .product-footer {
+      padding: 0 .75rem .75rem;
+    }
+    .btn-cart {
+      width: 100%;
+      padding: .45rem;
+      background: var(--brown);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background .2s;
+      font-family: inherit;
+    }
+    .btn-cart:hover { background: #6a4a30; }
+    .btn-cart:disabled { background: #ccc; cursor: not-allowed; }
+
+    /* ===== Pagination ===== */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: .4rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--warm);
+      border-radius: 5px;
+      font-size: 13px;
+      cursor: pointer;
+      background: #fff;
+      color: var(--dark);
+      transition: background .2s, color .2s;
+      text-decoration: none;
+    }
+    .page-btn:hover, .page-btn.active {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: #fff;
+    }
+    .page-btn.prev-next { width: auto; padding: 0 .75rem; }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      margin-top: 3rem;
+      background: var(--dark);
+      color: #aaa;
+      padding: 2rem 1.5rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .footer-col h4 {
+      font-size: 12px;
+      color: var(--warm);
+      margin-bottom: .6rem;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: .3rem; }
+    .footer-col a { font-size: 12px; color: #999; }
+    .footer-col a:hover { color: var(--warm); }
+
+    .footer-bottom {
+      border-top: 1px solid #4a3020;
+      padding-top: 1rem;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    /* ===== Cart Drawer (simple) ===== */
+    .cart-icon-wrap {
+      position: relative;
+      cursor: pointer;
+    }
+    .cart-btn {
+      background: var(--brown);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: .35rem .8rem;
+      font-size: 13px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+      font-family: inherit;
+      white-space: nowrap;
+      transition: background .2s;
+    }
+    .cart-btn:hover { background: #6a4a30; }
+    .cart-count {
+      background: var(--accent);
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      border-radius: 50%;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-drawer {
+      display: none;
+      position: fixed;
+      top: 0; right: 0; bottom: 0;
+      width: min(360px, 100vw);
+      background: #fff;
+      box-shadow: -4px 0 20px rgba(0,0,0,.2);
+      z-index: 200;
+      flex-direction: column;
+    }
+    .cart-drawer.open { display: flex; }
+    .cart-drawer-header {
+      background: var(--dark);
+      color: #fff;
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cart-drawer-header h3 { font-size: 15px; }
+    .cart-close {
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 22px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .cart-items { flex: 1; overflow-y: auto; padding: 1rem; }
+    .cart-item {
+      display: flex;
+      gap: .75rem;
+      padding: .75rem 0;
+      border-bottom: 1px solid #eee;
+      align-items: flex-start;
+    }
+    .cart-item-img {
+      width: 56px;
+      height: 56px;
+      background: var(--ivory);
+      border-radius: 5px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .cart-item-info { flex: 1; font-size: 12px; }
+    .cart-item-name { color: var(--dark); margin-bottom: .2rem; line-height: 1.4; }
+    .cart-item-id { color: #aaa; font-size: 10.5px; margin-bottom: .2rem; }
+    .cart-item-price { color: var(--brown); font-weight: bold; font-size: 14px; }
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: #ccc;
+      font-size: 18px;
+      cursor: pointer;
+      line-height: 1;
+      padding: .1rem .2rem;
+    }
+    .cart-item-remove:hover { color: var(--accent); }
+    .cart-empty { text-align: center; color: #aaa; padding: 2rem; font-size: 13px; }
+
+    .cart-footer {
+      padding: 1rem;
+      border-top: 1px solid #eee;
+      background: var(--ivory);
+    }
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--dark);
+      margin-bottom: .75rem;
+    }
+    .cart-total span:last-child { color: var(--brown); font-size: 17px; }
+    .btn-checkout {
+      width: 100%;
+      padding: .7rem;
+      background: var(--brown);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .2s;
+    }
+    .btn-checkout:hover { background: #6a4a30; }
+    .cart-note { font-size: 11px; color: #888; margin-top: .5rem; text-align: center; }
+
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.35);
+      z-index: 190;
+    }
+    .cart-overlay.open { display: block; }
+
+    /* ===== Modal (product detail) ===== */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: var(--radius);
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 8px 40px rgba(0,0,0,.25);
+    }
+    .modal-header {
+      background: var(--dark);
+      color: #fff;
+      padding: 1rem 1.2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+    }
+    .modal-header h3 { font-size: 13px; color: var(--warm); }
+    .modal-close {
+      background: none; border: none; color: #ccc;
+      font-size: 22px; cursor: pointer; line-height: 1;
+    }
+    .modal-body { padding: 1.2rem; }
+    .modal-img {
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      background: var(--ivory);
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+    .modal-img-placeholder {
+      width: 100%;
+      height: 200px;
+      background: var(--ivory);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ccc;
+      font-size: 48px;
+      margin-bottom: 1rem;
+    }
+    .modal-product-name { font-size: 16px; font-weight: bold; color: var(--dark); margin-bottom: .3rem; }
+    .modal-product-id { font-size: 12px; color: #aaa; margin-bottom: .8rem; }
+    .modal-specs {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .3rem .8rem;
+      font-size: 13px;
+      margin-bottom: 1rem;
+      background: var(--ivory);
+      border-radius: 6px;
+      padding: .8rem;
+    }
+    .modal-specs dt { color: var(--brown); font-weight: bold; white-space: nowrap; }
+    .modal-specs dd { color: var(--dark); }
+    .modal-desc { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 1rem; }
+    .modal-price {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--brown);
+      margin-bottom: .3rem;
+    }
+    .modal-price.sold { color: var(--sold); text-decoration: line-through; font-size: 18px; }
+    .modal-sold-note { font-size: 13px; color: var(--sold); margin-bottom: .8rem; }
+    .btn-modal-cart {
+      width: 100%;
+      padding: .75rem;
+      background: var(--brown);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .2s;
+    }
+    .btn-modal-cart:hover { background: #6a4a30; }
+    .btn-modal-cart:disabled { background: #ccc; cursor: not-allowed; }
+    .modal-links { margin-top: .75rem; font-size: 12px; text-align: center; color: #888; }
+    .modal-links a { color: var(--brown); }
+
+    /* ===== Toast ===== */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: var(--dark);
+      color: #fff;
+      padding: .75rem 1.2rem;
+      border-radius: 8px;
+      font-size: 13px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.25);
+      z-index: 400;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform .3s, opacity .3s;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .header-nav { display: none; }
+      .header-nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 56px;
+        left: 0; right: 0;
+        background: var(--dark);
+        padding: .5rem 1rem 1rem;
+        gap: .1rem;
+        border-top: 1px solid #4a3020;
+      }
+      .header-nav.open a { font-size: 13px; padding: .5rem; border-bottom: 1px solid #333; }
+      .hamburger { display: flex; }
+      .main-wrap {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+      }
+      .sidebar { order: 2; }
+      .sidebar-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: .75rem;
+      }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    }
+
+    @media (max-width: 480px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+      .hero { padding: 2rem 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="site-logo" style="text-decoration:none">
+      <span class="logo-en">Petit mignon, Grand beau</span>
+      <span class="logo-ja">フレンチアンティーク ブルターニュ直送</span>
+    </a>
+
+    <nav class="header-nav" id="mainNav">
+      <a href="https://www.pmgb.net/riyou1.html" target="_blank">初めての方へ</a>
+      <a href="https://www.pmgb.net/riyou.html" target="_blank">ご利用案内</a>
+      <a href="https://www.pmgb.net/about.html" target="_blank">お店について</a>
+      <a href="https://www.pmgb.net/sold.html" target="_blank">売れた商品</a>
+      <a href="https://www.pmgb.net/riyou_FAQ.html" target="_blank">FAQ</a>
+      <a href="https://petitmignongrandbeau.blog.fc2.com/" target="_blank">ブログ</a>
+      <a href="https://www.pmgb.net/sale.html" target="_blank" style="color:#f8a">セール</a>
+    </nav>
+
+    <div style="display:flex;align-items:center;gap:.6rem;flex-shrink:0">
+      <div class="cart-icon-wrap">
+        <button class="cart-btn" id="cartOpenBtn" aria-label="カートを開く">
+          🛒 カート
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+      <button class="hamburger" id="hamburgerBtn" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-title">Petit mignon, Grand beau</div>
+  <p class="hero-subtitle">フランス・ブルターニュ地方の蚤の市から、隔週でお届けしています</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <strong>2026年2月24日</strong>最終更新
+    </div>
+    <div class="hero-meta-item">
+      <strong>2026年3月24日（火）</strong>次回更新予定
+    </div>
+    <div class="hero-meta-item">
+      <strong>Depuis 2004</strong>SIRET: 48206108200020
+    </div>
+  </div>
+</section>
+
+<!-- ===== Category Bar ===== -->
+<div class="category-bar">
+  <div class="category-bar-inner">
+    <span class="cat-label">カテゴリ：</span>
+    <button class="cat-btn active" data-cat="all">すべて</button>
+    <button class="cat-btn" data-cat="new">NEW</button>
+    <button class="cat-btn" data-cat="acse">アクセサリー</button>
+    <button class="cat-btn" data-cat="kitchen_K">食器類</button>
+    <button class="cat-btn" data-cat="kitchen_U">調理器具</button>
+    <button class="cat-btn" data-cat="interia_F">家具</button>
+    <button class="cat-btn" data-cat="interia_I">小物</button>
+    <button class="cat-btn" data-cat="soing">ソーイング</button>
+    <button class="cat-btn" data-cat="paper">紙製品</button>
+    <button class="cat-btn" data-cat="toy">おもちゃ</button>
+    <button class="cat-btn sale" data-cat="sale">セール</button>
+  </div>
+</div>
+
+<!-- ===== Notice ===== -->
+<div class="notice-bar">
+  <div class="notice-bar-inner">
+    📦 2月の為替レート: <strong>@¥189.488/€</strong>　|　
+    ⚠️ ご注文前に必ず<a href="https://www.pmgb.net/riyou_rule.html" target="_blank">当店ルール早見表</a>をお読みください　|　
+    ✉️ 注文確認メールは迷惑メールフォルダもご確認ください
+  </div>
+</div>
+
+<!-- ===== Main ===== -->
+<div class="main-wrap">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <div class="sidebar-card">
+      <h3>更新スケジュール</h3>
+      <div class="update-schedule">
+        <div>隔週火曜更新</div>
+        <div class="next-date">📅 3月24日（火）</div>
+        <div class="holiday">定休日：毎週土・日曜<br>メール返信は平日のみ</div>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>為替レート（2月）</h3>
+      <div class="exchange-rate">
+        <span class="rate-num">¥189.49<small>/€</small></span>
+        <div class="rate-note">送料は重量計測後にメールでご案内</div>
+        <a href="https://www.pmgb.net/riyou_souryou.html" target="_blank" style="font-size:12px">送料一覧 →</a>
+      </div>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>お支払い方法</h3>
+      <div class="payment-icons">
+        <div class="payment-icon-item"><span class="icon">💳</span> PayPal（クレカ可）</div>
+        <div class="payment-icon-item"><span class="icon">🏦</span> WISE銀行振込</div>
+      </div>
+      <p style="font-size:11px;color:#888;margin-top:.5rem">
+        カード情報は当店に届きません（PayPal経由のため安全）
+      </p>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>リンク</h3>
+      <ul class="sidebar-links">
+        <li><a href="https://petitmignongrandbeau.blog.fc2.com/" target="_blank">📝 ブログ（仕入れ動画）</a></li>
+        <li><a href="https://www.youtube.com/@RenPetitMignonGrandBeau" target="_blank">▶️ YouTube</a></li>
+        <li><a href="https://www.facebook.com/PMGBFRANCE/" target="_blank">📘 Facebook</a></li>
+        <li><a href="https://www.etsy.com/shop/PetitMignonGrandBeau/" target="_blank">🌍 Etsy (English)</a></li>
+        <li><a href="https://www.pmgb.net/cgi-bin/sunbbs/" target="_blank">⭐ お客様の声</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>ショップ情報</h3>
+      <ul class="sidebar-links">
+        <li><a href="https://www.pmgb.net/riyou1.html" target="_blank">初めてのお客様へ</a></li>
+        <li><a href="https://www.pmgb.net/riyou_chumon.html" target="_blank">ご注文方法</a></li>
+        <li><a href="https://www.pmgb.net/riyou_shiharai.html" target="_blank">お支払い方法</a></li>
+        <li><a href="https://www.pmgb.net/riyou_souryou.html" target="_blank">送料について</a></li>
+        <li><a href="https://www.pmgb.net/riyou_henpin.html" target="_blank">返品・返金</a></li>
+        <li><a href="https://www.pmgb.net/orosiuri.html" target="_blank">販売店様（卸売り）</a></li>
+        <li><a href="https://www.pmgb.net/riyou_hyouki.html" target="_blank">訪問販売法表記</a></li>
+      </ul>
+    </div>
+
+  </aside>
+
+  <!-- Content -->
+  <div class="content-area">
+    <div class="section-header">
+      <div class="section-title">
+        新着商品
+        <span class="count" id="productCount"></span>
+      </div>
+      <a class="view-all-link" href="https://www.pmgb.net/" target="_blank">pmgb.net で全て見る →</a>
+    </div>
+
+    <div class="product-grid" id="productGrid"></div>
+
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+</div>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Petit mignon Grand beau</h4>
+        <p style="font-size:12px;color:#888;line-height:1.6">
+          フランス・ブルターニュ地方から<br>
+          日本向けにアンティーク雑貨を<br>
+          インターネット販売（2004年〜）
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4>ご購入案内</h4>
+        <ul>
+          <li><a href="https://www.pmgb.net/riyou_chumon.html" target="_blank">ご注文方法</a></li>
+          <li><a href="https://www.pmgb.net/riyou_shiharai.html" target="_blank">お支払い方法</a></li>
+          <li><a href="https://www.pmgb.net/riyou_souryou.html" target="_blank">送料について</a></li>
+          <li><a href="https://www.pmgb.net/riyou_henpin.html" target="_blank">返品・返金</a></li>
+          <li><a href="https://www.pmgb.net/riyou_cansel.html" target="_blank">キャンセル</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>お店について</h4>
+        <ul>
+          <li><a href="https://www.pmgb.net/about.html" target="_blank">お店の紹介</a></li>
+          <li><a href="https://www.pmgb.net/about_policy.html" target="_blank">会社哲学</a></li>
+          <li><a href="https://www.pmgb.net/riyou_FAQ.html" target="_blank">FAQ</a></li>
+          <li><a href="https://www.pmgb.net/riyou_hyouki.html" target="_blank">訪問販売法表記</a></li>
+          <li><a href="https://www.pmgb.net/riyou_policy.html" target="_blank">プライバシーポリシー</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>アンティークTIPS</h4>
+        <ul>
+          <li><a href="https://www.pmgb.net/BOL/cafeaulaitbol.htm" target="_blank">カフェオレボウルの秘密</a></li>
+          <li><a href="https://www.pmgb.net/shufuku.html" target="_blank">陶器の修復・使用</a></li>
+          <li><a href="https://petitmignongrandbeau.blog.fc2.com/blog-entry-1926.html" target="_blank">古書の年代の見方</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2005–2026 Petit mignon Grand beau — 画像・文章の無断転載禁止</span>
+      <span>Web design: <a href="https://www.vehem.fr/" target="_blank" style="color:#888">vehem.fr</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Cart Drawer ===== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <h3>🛒 カートの中身</h3>
+    <button class="cart-close" id="cartCloseBtn">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>商品代金合計</span>
+      <span id="cartTotalPrice">¥0</span>
+    </div>
+    <button class="btn-checkout" onclick="alert('注文フローはpmgb.netのシステムを使用します。\n実際のご注文はhttps://www.pmgb.net/ よりお願いします。')">
+      注文手続きへ進む →
+    </button>
+    <p class="cart-note">※送料は梱包後に計量し、別途メールでご案内します</p>
+  </div>
+</div>
+
+<!-- ===== Product Detail Modal ===== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h3 id="modalBreadcrumb">商品詳細</h3>
+      <button class="modal-close" id="modalCloseBtn">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== Product Data (from pmgb.net top page, Feb 2026 update) =====
+const PRODUCTS = [
+  // Accessories
+  { id: 'A260020', cat: 'acse', name: '1940年代 ワンピース 薄水色', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'A260021', cat: 'acse', name: 'ヴィンテージ フランス製 スカーフ 7枚セット', price: 2800, sold: false, isNew: true, weight: '350g', condition: 'B', desc: '古いスカーフいろいろ、7枚セットです。一枚400円と大変お得になっています。' },
+  { id: 'A260022', cat: 'acse', name: '小さなベルト用飾り ペーストグラス 2個セット', price: 2500, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'A260023', cat: 'acse', name: '1900年 パリのエキスポ記念 小銭入れ', price: 5900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'A260024', cat: 'acse', name: '19世紀後期 トンボのモチーフ', price: 2900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'A260025', cat: 'acse', name: 'ミッドセンチュリー ツバメのブローチ', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+
+  // Paper
+  { id: 'B260007', cat: 'paper', name: '19世紀後期 パピエマルシェ製 ペントレイ ナポレオンIII世', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'B260008', cat: 'paper', name: 'ヴィンテージ LU メモ帳', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+
+  // Furniture / Interior
+  { id: 'F260012', cat: 'interia_F', name: '1940年代前後 木製ディスプレイスタンド', price: 12900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'F260013', cat: 'interia_F', name: 'ミッドセンチュリー 木製 書類入れ', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'F260014', cat: 'interia_F', name: 'ミッドセンチュリー テーブルシャンデリア', price: 11900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'F260015', cat: 'interia_F', name: 'ミッドセンチュリー テーブルランプ', price: 6900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+
+  // Small items
+  { id: 'I260040', cat: 'interia_I', name: '20世紀初期 紙製チョコレート用ボックス グラヴィエ', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'I260041', cat: 'interia_I', name: 'ミッドセンチュリー 真ちゅう製 手紙ホルダー', price: 3900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'I260042', cat: 'interia_I', name: '19世紀後期～20世紀初期 カーテン用クリップ 猫足デザイン 9個セット', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'I260043', cat: 'interia_I', name: 'ヴィンテージ ワイヤー製ワインホルダー', price: 3900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'I260044', cat: 'interia_I', name: '20世紀初期 紙製チョコレート用ボックス グラヴィエ 金糸リボン', price: 3900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'I260045', cat: 'interia_I', name: 'ミッドセンチュリー ミルクガラス製 化粧水用ボトル ピンク', price: 4900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'I260046', cat: 'interia_I', name: '20世紀初期 吹きガラス製 化粧水用ボトル クランベリー 小', price: 3900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'I260047', cat: 'interia_I', name: '20世紀初期 吹きガラス製 化粧水用ボトル クランベリー 大', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'I260048', cat: 'interia_I', name: '19世紀後期～20世紀初期 金属＆木製マネートレイ', price: 11900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'I260049', cat: 'interia_I', name: '19世紀後期 メダイヨン キリスト様', price: 10900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'I260050', cat: 'interia_I', name: 'ミッドセンチュリー ビスケット用缶 取っ手付き', price: 2900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+
+  // Kitchen - tableware
+  { id: 'K260024', cat: 'kitchen_K', name: '20世紀初期 ポーセリン製シュクリエール', price: 3900, sold: false, isNew: true, weight: '490g', condition: 'B-C', desc: '古い型吹きグラス製のリキュールグラスセット。グラスの縁に欠けのようなところがありますが、作られた当時のよれで欠けではありません。古いものなので金属部分に変色があります。', size: '直径12㎝×高さ17.5㎝' },
+  { id: 'K260025', cat: 'kitchen_K', name: 'ミッドセンチュリー 型吹きグラス製 リキュールグラスセット', price: 3900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'K260026', cat: 'kitchen_K', name: '19世紀後期～20世紀初期 GIEN製 楕円の大皿', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'K260027', cat: 'kitchen_K', name: '1940年代前後 MDL製 プレート（各）', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'K260028', cat: 'kitchen_K', name: '1940年代前後 MDL製 プレート', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'K260029', cat: 'kitchen_K', name: '1940年代前後 バドンビレー製 プレート アイボリー', price: 2900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'K260030', cat: 'kitchen_K', name: '1940年代前後 サルグミンヌ製 プレート 花形リム', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'K260031', cat: 'kitchen_K', name: '19世紀後期～20世紀初期 St Amand製 スーピエール', price: 6900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'K260032', cat: 'kitchen_K', name: '19世紀後期～20世紀初期 Choisy Le roi製 デミタスカップ エナメル', price: 2500, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'K260033', cat: 'kitchen_K', name: '19世紀後期 ポーセリン製 ラヴィエ', price: 4500, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'K260034', cat: 'kitchen_K', name: '19世紀初期 テラコッタ製 イチゴ皿', price: 7500, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'K260035', cat: 'kitchen_K', name: '20世紀初期 MDL製 楕円の大皿 水色', price: 2900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+
+  // Kitchen utensils
+  { id: 'U260016', cat: 'kitchen_U', name: '1960年代前後 プラスティック製キャニスター 4つセット', price: 5900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'U260017', cat: 'kitchen_U', name: 'ミッドセンチュリー 粉砂糖用スプーン ☆', price: 1900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'U260018', cat: 'kitchen_U', name: 'ミッドセンチュリー シルバープレート製 ワインクーラー 小', price: 5900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'U260019', cat: 'kitchen_U', name: '20世紀初期 ピューター製 スパイス容器 テーブル用', price: 3900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'U260020', cat: 'kitchen_U', name: '19世紀後期 テラコッタ製 ドリッピングパン', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+
+  // Sewing
+  { id: 'S260025', cat: 'soing', name: '20世紀初期 金糸リボン＆アールデコリボンセット', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'S260026', cat: 'soing', name: '20世紀初期 フィレレース 人魚', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'S260027', cat: 'soing', name: '1960年代前後 木製ソーイングボックス', price: 8900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'S260028', cat: 'soing', name: 'ヴィンテージ DMC 刺繍糸 ECRU & Blanc', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'S260029', cat: 'soing', name: 'ヴィンテージ DMC 刺繍糸 Blanc Neige', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'S260030', cat: 'soing', name: '20世紀初期 フィレレース 女性', price: 3900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'S260031', cat: 'soing', name: '19世紀後期 コットン製 ペチコート 手刺刺繍', price: null, sold: true, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'S260032', cat: 'soing', name: '19世紀後期 コットン製ナイトウエア', price: 2900, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+
+  // Toys
+  { id: 'T260011', cat: 'toy', name: '中古バービー人形 6体セット', price: 1500, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+  { id: 'T260012', cat: 'toy', name: 'ヴィンテージ ソノシート5枚セット', price: 1000, sold: false, isNew: true, weight: null, condition: null, desc: '' },
+];
+
+// Category label map
+const CAT_LABELS = {
+  acse: 'アクセサリー',
+  paper: '紙製品',
+  interia_F: '家具',
+  interia_I: '小物',
+  kitchen_K: '食器類',
+  kitchen_U: '調理器具',
+  soing: 'ソーイング',
+  toy: 'おもちゃ',
+  key: '鍵',
+};
+
+// Emoji placeholder per category
+const CAT_EMOJI = {
+  acse: '💍', paper: '📄', interia_F: '🪑', interia_I: '🏺',
+  kitchen_K: '🍽️', kitchen_U: '🥄', soing: '🧵', toy: '🎪', key: '🔑',
+};
+
+// ===== State =====
+let cart = JSON.parse(localStorage.getItem('pmgb_cart') || '[]');
+let currentFilter = 'all';
+const PAGE_SIZE = 24;
+let currentPage = 1;
+
+// ===== Helpers =====
+function fmt(n) {
+  return '¥' + n.toLocaleString('ja-JP');
+}
+function saveCart() {
+  localStorage.setItem('pmgb_cart', JSON.stringify(cart));
+}
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ===== Filter =====
+function getFiltered() {
+  if (currentFilter === 'all') return PRODUCTS;
+  if (currentFilter === 'new') return PRODUCTS.filter(p => p.isNew);
+  if (currentFilter === 'sale') return PRODUCTS.filter(p => p.sale);
+  return PRODUCTS.filter(p => p.cat === currentFilter);
+}
+
+// ===== Render Products =====
+function renderProducts() {
+  const filtered = getFiltered();
+  const total = filtered.length;
+  const pages = Math.ceil(total / PAGE_SIZE);
+  if (currentPage > pages) currentPage = 1;
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const items = filtered.slice(start, start + PAGE_SIZE);
+
+  document.getElementById('productCount').textContent =
+    total > PAGE_SIZE
+      ? `（${start + 1}–${Math.min(start + PAGE_SIZE, total)} / ${total}件）`
+      : `（${total}件）`;
+
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = '';
+
+  items.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'product-card' + (p.sold ? ' is-sold' : '');
+    card.dataset.id = p.id;
+
+    const emoji = CAT_EMOJI[p.cat] || '🏷️';
+    const inCart = cart.some(c => c.id === p.id);
+
+    card.innerHTML = `
+      <div class="product-img-wrap">
+        <div class="product-img-placeholder">
+          <span class="ph-icon">${emoji}</span>
+          <span class="ph-text">${CAT_LABELS[p.cat] || ''}</span>
+        </div>
+        <div class="badge-row">
+          ${p.isNew ? '<span class="badge badge-new">NEW</span>' : ''}
+          ${p.sold ? '<span class="badge badge-sold">SOLD</span>' : ''}
+          ${p.sale ? '<span class="badge badge-sale">SALE</span>' : ''}
+        </div>
+      </div>
+      <div class="product-info">
+        <div class="product-id">${p.id}</div>
+        <div class="product-name">${p.name}</div>
+        ${p.price
+          ? `<div class="product-price ${p.sold ? 'sold-price' : ''}">${fmt(p.price)}</div>`
+          : p.sold ? '<div class="product-price sold-price">SOLD</div>' : ''}
+        ${p.weight ? `<div class="product-weight">重さ: ${p.weight}</div>` : ''}
+      </div>
+      <div class="product-footer">
+        <button class="btn-cart" ${p.sold ? 'disabled' : ''}
+          data-id="${p.id}">
+          ${p.sold ? '売り切れ' : inCart ? '✓ カートに追加済み' : 'カートに追加'}
+        </button>
+      </div>
+    `;
+
+    // Click card → modal (not on button)
+    card.addEventListener('click', e => {
+      if (!e.target.closest('.btn-cart')) openModal(p);
+    });
+    // Cart button
+    card.querySelector('.btn-cart').addEventListener('click', e => {
+      e.stopPropagation();
+      addToCart(p);
+    });
+
+    grid.appendChild(card);
+  });
+
+  renderPagination(pages);
+}
+
+// ===== Pagination =====
+function renderPagination(pages) {
+  const el = document.getElementById('pagination');
+  el.innerHTML = '';
+  if (pages <= 1) return;
+
+  const mkBtn = (label, page, cls = '') => {
+    const b = document.createElement('button');
+    b.className = 'page-btn ' + cls;
+    b.textContent = label;
+    if (page === currentPage) b.classList.add('active');
+    b.addEventListener('click', () => {
+      currentPage = page;
+      renderProducts();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    el.appendChild(b);
+  };
+
+  if (currentPage > 1) mkBtn('← 前', currentPage - 1, 'prev-next');
+  for (let i = 1; i <= pages; i++) mkBtn(i, i);
+  if (currentPage < pages) mkBtn('次 →', currentPage + 1, 'prev-next');
+}
+
+// ===== Cart =====
+function addToCart(p) {
+  if (p.sold) return;
+  if (cart.some(c => c.id === p.id)) {
+    showToast(`${p.id} はすでにカートに入っています`);
+    return;
+  }
+  cart.push({ id: p.id, name: p.name, price: p.price, cat: p.cat });
+  saveCart();
+  updateCartUI();
+  renderProducts();
+  showToast(`🛒 カートに追加しました：${p.id}`);
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  saveCart();
+  updateCartUI();
+  renderProducts();
+}
+
+function updateCartUI() {
+  const count = cart.length;
+  document.getElementById('cartCount').textContent = count;
+
+  const items = document.getElementById('cartItems');
+  if (count === 0) {
+    items.innerHTML = '<div class="cart-empty">カートは空です</div>';
+  } else {
+    items.innerHTML = cart.map(c => {
+      const emoji = CAT_EMOJI[c.cat] || '🏷️';
+      return `
+        <div class="cart-item">
+          <div class="cart-item-img" style="display:flex;align-items:center;justify-content:center;font-size:28px">${emoji}</div>
+          <div class="cart-item-info">
+            <div class="cart-item-id">${c.id}</div>
+            <div class="cart-item-name">${c.name}</div>
+            <div class="cart-item-price">${c.price ? fmt(c.price) : '—'}</div>
+          </div>
+          <button class="cart-item-remove" data-id="${c.id}">✕</button>
+        </div>
+      `;
+    }).join('');
+    items.querySelectorAll('.cart-item-remove').forEach(btn => {
+      btn.addEventListener('click', () => removeFromCart(btn.dataset.id));
+    });
+  }
+
+  const total = cart.reduce((s, c) => s + (c.price || 0), 0);
+  document.getElementById('cartTotalPrice').textContent = fmt(total);
+}
+
+// ===== Modal =====
+function openModal(p) {
+  const emoji = CAT_EMOJI[p.cat] || '🏷️';
+  const inCart = cart.some(c => c.id === p.id);
+
+  document.getElementById('modalBreadcrumb').textContent =
+    (CAT_LABELS[p.cat] || p.cat) + ' › ' + p.id;
+
+  const body = document.getElementById('modalBody');
+  body.innerHTML = `
+    <div class="modal-img-placeholder">${emoji}</div>
+    <div class="modal-product-name">${p.name}</div>
+    <div class="modal-product-id">商品番号: ${p.id}</div>
+    ${(p.size || p.weight || p.condition) ? `
+    <dl class="modal-specs">
+      ${p.size ? `<dt>サイズ</dt><dd>${p.size}</dd>` : ''}
+      ${p.weight ? `<dt>重さ</dt><dd>${p.weight}</dd>` : ''}
+      ${p.condition ? `<dt>状態</dt><dd>${p.condition}　<a href="https://www.pmgb.net/Condition.html" target="_blank" style="font-size:11px">状態説明→</a></dd>` : ''}
+    </dl>` : ''}
+    ${p.desc ? `<p class="modal-desc">${p.desc}</p>` : ''}
+    ${p.price
+      ? `<div class="modal-price ${p.sold ? 'sold' : ''}">${fmt(p.price)}</div>`
+      : p.sold ? '<div class="modal-price sold">SOLD OUT</div>' : ''}
+    ${p.sold
+      ? '<p class="modal-sold-note">この商品は売り切れです</p>'
+      : `<button class="btn-modal-cart" id="modalCartBtn">${inCart ? '✓ カートに追加済み' : '🛒 カートに追加する'}</button>`}
+    <div class="modal-links">
+      <a href="https://www.pmgb.net/${p.cat}_${p.id}.html" target="_blank">pmgb.net で実際の商品ページを見る →</a>
+      &nbsp;|&nbsp;
+      <a href="https://www.pmgb.net/riyou_souryou.html" target="_blank">送料一覧</a>
+    </div>
+  `;
+
+  if (!p.sold) {
+    const btn = document.getElementById('modalCartBtn');
+    btn.addEventListener('click', () => {
+      addToCart(p);
+      btn.textContent = '✓ カートに追加済み';
+      btn.disabled = true;
+    });
+  }
+
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ===== Category Filter =====
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.cat;
+    currentPage = 1;
+    renderProducts();
+  });
+});
+
+// ===== Cart Drawer =====
+document.getElementById('cartOpenBtn').addEventListener('click', () => {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+});
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('cartCloseBtn').addEventListener('click', closeCart);
+document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+// ===== Modal close =====
+document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+});
+
+// ===== Hamburger =====
+document.getElementById('hamburgerBtn').addEventListener('click', () => {
+  document.getElementById('mainNav').classList.toggle('open');
+});
+
+// ===== Keyboard =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeCart(); }
+});
+
+// ===== Init =====
+updateCartUI();
+renderProducts();
+</script>
+</body>
+</html>

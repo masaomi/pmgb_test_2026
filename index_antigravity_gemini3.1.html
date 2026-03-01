@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petit mignon Grand beau | フレンチアンティーク</title>
+    <!-- Google Fonts for a more elegant typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+JP:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Basic Setup */
+        :root {
+            --primary-color: #8A7361; /* Muted brown/gray for an antique feel */
+            --secondary-color: #F8F5F2; /* Off-white background */
+            --text-main: #333333;
+            --text-light: #666666;
+            --accent-color: #A65A5A; /* Deep red for accents like sale/new */
+            --border-color: #E0DCD3;
+            --font-serif: 'Cormorant Garamond', 'Noto Serif JP', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-serif);
+            background-color: var(--secondary-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+            margin: 10px auto 0;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .header-top .catchphrase {
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        .header-top .lang-switch a {
+            padding: 5px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-area h1 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--primary-color);
+            letter-spacing: 0.05em;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        nav a {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding-bottom: 5px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section (Info Board) */
+        .hero-banner {
+            background-image: linear-gradient(rgba(248, 245, 242, 0.8), rgba(248, 245, 242, 0.9)), url('https://images.unsplash.com/photo-1584982635398-4c12ef044949?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); /* Placolder antique image */
+            background-size: cover;
+            background-position: center;
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+
+        .info-board {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+
+        .update-info h2 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .update-dates {
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        .update-dates strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--accent-color);
+        }
+
+        .highlight-notice {
+            background-color: #FFF9F9;
+            border-left: 4px solid var(--accent-color);
+            padding: 10px 15px;
+            text-align: left;
+            font-size: 0.9rem;
+            margin-top: 20px;
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background-color: #eee;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Mock images for demo */
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #fff;
+            border-radius: 4px;
+            z-index: 2;
+        }
+
+        .badge.new {
+            background-color: var(--accent-color);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .product-id {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            width: 100%;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .pagination a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .pagination a.active, .pagination a:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2C2825;
+            color: #E0DCD3;
+            padding: 60px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #fff;
+            border-bottom: 1px solid #4A443F;
+            padding-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #B0A99F;
+        }
+
+        .footer-section a:hover {
+            color: #fff;
+        }
+
+        .payment-methods {
+            margin-top: 20px;
+        }
+
+        .payment-methods p {
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #4A443F;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Float Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            .logo-area h1 {
+                font-size: 2rem;
+            }
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <span class="catchphrase">フランス ブルターニュ地方の蚤の市をそのまま日本へ、隔週でお届けしています。</span>
+                <div class="lang-switch">
+                    <a href="https://www.etsy.com/shop/PetitMignonGrandBeau/" target="_blank">ENGLISH (Etsy)</a>
+                </div>
+            </div>
+            <div class="logo-area">
+                <h1>Petit mignon Grand beau</h1>
+            </div>
+            <nav>
+                <a href="#new-arrivals">新着商品</a>
+                <a href="#">全商品一覧</a>
+                <a href="#">SALE (ワゴンセール)</a>
+                <a href="#">初めてのお客様へ</a>
+                <a href="#">ご利用案内</a>
+                <a href="#">お問い合わせ</a>
+                <a href="#">ブログ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero / Info Section -->
+    <section class="hero-banner">
+        <div class="container">
+            <div class="info-board">
+                <div class="update-info">
+                    <h2>最新の更新情報</h2>
+                    <div class="update-dates">
+                        <strong>2月24日（火） 新入荷商品 50点更新しました！</strong>
+                        <p>ワゴンセール 76点が増えました（50%引きです）</p>
+                    </div>
+                    <div class="update-dates" style="margin-top:20px; padding-top:20px; border-top: 1px dashed var(--border-color);">
+                        <p>隔週火曜頃更新！ 今後の更新予定日:</p>
+                        <p>2025年3月10日（火） / 2026年3月24日（火）</p>
+                    </div>
+                </div>
+                <div class="highlight-notice">
+                    <strong>配送状況について:</strong><br>
+                    格安宅配便、郵便局共に2週間程度で日本に届いております。もし1か月経っても届いていない場合は不在票を入れずに郵便局でキープしている可能性もありますので、追跡番号でチェックしてみていください。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- New Arrivals Section -->
+        <section id="new-arrivals">
+            <h2 class="section-title">新着商品 (New Arrivals)</h2>
+            <div class="products-grid">
+                
+                <!-- Product Item 1 -->
+                <article class="product-card">
+                    <div class="badge new">NEW!</div>
+                    <div class="product-image">
+                        <!-- Placeholder image representing antique furniture/stand -->
+                        <img src="https://images.unsplash.com/photo-1594950942635-b2861a7a242c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="1940年代前後 木製ディスプレイスタンド">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-id">F260012</p>
+                        <h3 class="product-title">1940年代前後 木製ディスプレイスタンド</h3>
+                        <p class="product-price">¥12,900</p>
+                        <button class="btn" onclick="openDetails('F260012')">詳細を見る</button>
+                    </div>
+                </article>
+
+                <!-- Product Item 2 -->
+                <article class="product-card">
+                    <div class="badge new">NEW!</div>
+                    <div class="product-image">
+                        <!-- Placeholder image representing pink glassware -->
+                        <img src="https://images.unsplash.com/photo-1601002347525-2c8eafb11964?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="ミッドセンチュリー ミルクガラス製 化粧水用ボトル ピンク">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-id">I260045</p>
+                        <h3 class="product-title">ミッドセンチュリー ミルクガラス製 化粧水用ボトル ピンク</h3>
+                        <p class="product-price">¥4,900</p>
+                        <button class="btn" onclick="openDetails('I260045')">詳細を見る</button>
+                    </div>
+                </article>
+
+                <!-- Product Item 3 -->
+                <article class="product-card">
+                    <div class="badge new">NEW!</div>
+                    <div class="product-image">
+                        <!-- Placeholder image representing red/cranberry glassware -->
+                        <img src="https://images.unsplash.com/photo-1621272036047-bb0f76bbc1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="20世紀初期 吹きガラス製 化粧水用ボトル クランベリー 小">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-id">I260046</p>
+                        <h3 class="product-title">20世紀初期 吹きガラス製 化粧水用ボトル クランベリー 小</h3>
+                        <p class="product-price">¥3,900</p>
+                        <button class="btn" onclick="openDetails('I260046')">詳細を見る</button>
+                    </div>
+                </article>
+
+                <!-- More dummy items to show the grid -->
+                <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1596700877983-a0e231189c47?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="アンティークプレート">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-id">P250101</p>
+                        <h3 class="product-title">19世紀 サルグミンヌ 花柄プレート</h3>
+                        <p class="product-price">¥8,500</p>
+                        <button class="btn" onclick="openDetails('P250101')">詳細を見る</button>
+                    </div>
+                </article>
+                 <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1577038148912-327c862af83e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="アンティーク小物">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-id">M250089</p>
+                        <h3 class="product-title">真鍮製 アンティークキャンドルスタンド</h3>
+                        <p class="product-price">¥6,200</p>
+                        <button class="btn" onclick="openDetails('M250089')">詳細を見る</button>
+                    </div>
+                </article>
+                 <article class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1589578168289-519b7ce75975?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="アンティークボトル">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-id">B250055</p>
+                        <h3 class="product-title">フランス古い薬瓶 クリアガラス</h3>
+                        <p class="product-price">¥3,500</p>
+                        <button class="btn" onclick="openDetails('B250055')">詳細を見る</button>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Enhanced Pagination -->
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <span style="line-height: 40px;">...</span>
+                <a href="#">10</a>
+                <a href="#" style="width: auto; padding: 0 15px; border-radius: 20px;">NEXT ></a>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ご利用ガイド</h3>
+                    <ul>
+                        <li><a href="#">■初めてのお客様へ</a></li>
+                        <li><a href="#">■ご利用案内</a></li>
+                        <li><a href="#">■送料について</a></li>
+                        <li><a href="#">■訪問販売法に基づく表記</a></li>
+                        <li><a href="#">■当店ルール早見表</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>店舗情報</h3>
+                    <ul>
+                        <li><a href="#">■会社哲学</a></li>
+                        <li><a href="#">■販売店様へ（卸売りについて）</a></li>
+                        <li><a href="#">■お問い合わせ（FAQ)</a></li>
+                        <li><a href="#">■ブログ</a></li>
+                    </ul>
+                    <p style="margin-top: 15px; font-size: 0.9em;">
+                        会社登録番号(仏) SIRET NO 48206108200020 <br>
+                        Depuis 2004 （2004年発足）
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>お支払いについて</h3>
+                    <div class="payment-methods">
+                        <p>Paypalアカウントが無くても各種カードで直接お支払いができるようになりました。</p>
+                        <p>WISEを通しての銀行振り込みも受け付けています。</p>
+                        <p style="font-size: 0.8rem; margin-top:10px; color:#aaa;">
+                            取扱銀行: みずほ銀行、ゆうちょ銀行、三井住友銀行、三菱UFJ銀行、りそな銀行
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2005-2025 Petit mignon Grand beau, alright reserved. 画像・文章の無断転載禁止</p>
+                <p style="font-size: 0.7em; margin-top: 5px; color: #666;">
+                    当店のサイトは、SSL証明プロバイダーの世界NO1のCOMODOより、安全なSSLサーバにあるという証明書が発行されています。
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top" id="backToTop" aria-label="ページトップへ戻る">↑</a>
+
+    <!-- Simple Interactivity Scripts -->
+    <script>
+        // Back to top button functionality
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Mock function for detailed view button
+        function openDetails(productId) {
+            alert(`商品ID: ${productId} の詳細ページを開きます。\n(※これはモックアップのため実際の遷移はしません)`);
+        }
+        
+        // Add subtle animation to new products on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body>
+</html>

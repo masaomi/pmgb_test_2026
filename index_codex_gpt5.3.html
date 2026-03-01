@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PMGB Redesign Demo (Static)</title>
+  <meta name="description" content="PMGBトップページの静的リデザインデモ。HTML + JavaScriptのみで機能改善案を表示。" />
+  <style>
+    :root {
+      --bg: #f6f1e8;
+      --paper: #fffdf8;
+      --ink: #151515;
+      --muted: #655b4f;
+      --line: #dfd4c5;
+      --brand: #b3481f;
+      --brand-2: #1f6a5b;
+      --accent: #d7b26d;
+      --sold: #6f6f6f;
+      --ok: #1f6a5b;
+      --shadow: 0 14px 34px rgba(21, 21, 21, 0.12);
+      --radius: 18px;
+      --max: 1160px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Avenir Next", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 0%, #efe2cc 0%, transparent 45%),
+        radial-gradient(circle at 100% 30%, #ead5bc 0%, transparent 36%),
+        var(--bg);
+      min-height: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topline {
+      background: linear-gradient(120deg, #1f6a5b, #285f52);
+      color: #f7f5f0;
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      background: rgba(255, 253, 248, 0.9);
+    }
+
+    .shell {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 72px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.16em;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    button, select, input {
+      font: inherit;
+    }
+
+    .btn,
+    .ghost,
+    .chip {
+      border: 1px solid var(--ink);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn:hover,
+    .ghost:hover,
+    .chip:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .hero {
+      padding: 44px 0 30px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 18px;
+    }
+
+    .hero-main,
+    .hero-side {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 26px;
+    }
+
+    .hero-main {
+      background:
+        linear-gradient(140deg, rgba(179, 72, 31, 0.1), rgba(31, 106, 91, 0.07)),
+        var(--paper);
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--brand-2);
+      letter-spacing: 0.12em;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      line-height: 1.15;
+      font-size: clamp(28px, 5vw, 46px);
+      letter-spacing: 0.02em;
+      max-width: 18ch;
+    }
+
+    .lead {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 15px;
+      max-width: 52ch;
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .kpi {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .kpi b {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .kpi span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .hero-side h2 {
+      margin: 0 0 12px;
+      font-size: 18px;
+    }
+
+    .hero-side ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.8;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr 0.9fr auto;
+      gap: 10px;
+      margin: 14px 0 16px;
+    }
+
+    .field {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px;
+      min-height: 46px;
+      width: 100%;
+    }
+
+    .results-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      min-height: 300px;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+      transform: translateY(12px);
+      opacity: 0;
+      animation: in 0.35s ease forwards;
+    }
+
+    .thumb {
+      position: relative;
+      min-height: 170px;
+      padding: 14px;
+      color: #fff;
+      display: flex;
+      align-items: flex-end;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.45));
+    }
+
+    .thumb span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cat-bag { background: linear-gradient(135deg, #9f3f1b, #d87f4f); }
+    .cat-jewelry { background: linear-gradient(135deg, #184b41, #4c8f7f); }
+    .cat-cloth { background: linear-gradient(135deg, #5b4d3c, #9b8466); }
+    .cat-antique { background: linear-gradient(135deg, #4c4b66, #8685aa); }
+
+    .card-body {
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 3px 8px;
+      border: 1px solid transparent;
+      letter-spacing: 0.04em;
+    }
+
+    .tag-new {
+      background: #e5f4f1;
+      color: var(--brand-2);
+      border-color: #b9ddd5;
+    }
+
+    .tag-sale {
+      background: #fff2ea;
+      color: var(--brand);
+      border-color: #e8c4ad;
+    }
+
+    .tag-sold {
+      background: #efefef;
+      color: #555;
+      border-color: #ddd;
+    }
+
+    .title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .meta {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .sold {
+      color: var(--sold);
+    }
+
+    .buy {
+      border: 1px solid var(--ink);
+      background: #111;
+      color: #fff;
+      border-radius: 10px;
+      padding: 9px 11px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .buy[disabled] {
+      cursor: not-allowed;
+      background: #ddd;
+      color: #666;
+      border-color: #ccc;
+    }
+
+    .pager {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .page-btn {
+      min-width: 38px;
+      min-height: 38px;
+      border-radius: 11px;
+      border: 1px solid var(--line);
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .page-btn.active {
+      background: #151515;
+      color: #fff;
+      border-color: #151515;
+    }
+
+    .info {
+      margin: 36px 0 54px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+      background: var(--paper);
+    }
+
+    .panel h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+    }
+
+    .panel p,
+    .panel li {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .panel ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 18px 0 26px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .cart {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(380px, 100%);
+      height: 100%;
+      background: #fff;
+      border-left: 1px solid var(--line);
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart.open {
+      transform: translateX(0);
+    }
+
+    .cart-head {
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-list {
+      flex: 1;
+      overflow: auto;
+      padding: 12px 16px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .cart-item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .cart-item strong {
+      font-size: 14px;
+    }
+
+    .cart-foot {
+      border-top: 1px solid var(--line);
+      padding: 12px 16px 16px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .mini {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .empty {
+      color: var(--muted);
+      text-align: center;
+      padding: 20px;
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      font-size: 13px;
+    }
+
+    @keyframes in {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .info {
+        grid-template-columns: 1fr;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .controls {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .row {
+        min-height: 62px;
+      }
+
+      .logo {
+        font-size: 19px;
+      }
+
+      .subtitle {
+        display: none;
+      }
+
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .products {
+        grid-template-columns: 1fr;
+      }
+
+      .kpis {
+        grid-template-columns: 1fr;
+      }
+
+      .header-actions {
+        gap: 6px;
+      }
+
+      .btn,
+      .ghost,
+      .chip {
+        padding: 9px 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline" id="topline">次回更新: 2026-03-15 / 静的デモページ (HTML + JavaScript)</div>
+
+  <header class="site-header">
+    <div class="shell row">
+      <div class="logo-wrap">
+        <a href="#" class="logo">PMGB</a>
+        <div class="subtitle" id="subtitle">PRODUCTS MANAGEMENT GLOBAL BEAUTY</div>
+      </div>
+      <div class="header-actions">
+        <button class="chip" id="langBtn" aria-label="Toggle language">EN</button>
+        <button class="ghost" id="openCart">Cart <span id="cartCount">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-grid">
+        <article class="hero-main">
+          <div class="eyebrow" id="eyebrow">CURATED VINTAGE MARKET</div>
+          <h1 id="heroTitle">古いものに、次の価値を。</h1>
+          <p class="lead" id="heroLead">PMGBのトップページ改善案です。カテゴリ検索、ページング、SOLD表示、簡易カートを1ページで分かりやすく整理しました。サーバー改修なしでも、見た目と操作性をここまで改善できます。</p>
+          <div class="kpis">
+            <div class="kpi"><b id="kpi1">500+</b><span id="kpi1Label">掲載アイテム数</span></div>
+            <div class="kpi"><b id="kpi2">4</b><span id="kpi2Label">主要カテゴリ</span></div>
+            <div class="kpi"><b id="kpi3">24h</b><span id="kpi3Label">注文受付</span></div>
+          </div>
+        </article>
+        <aside class="hero-side">
+          <h2 id="sideTitle">この静的デモで示している改善</h2>
+          <ul id="sideList">
+            <li>商品検索・カテゴリ絞り込み・並び替え</li>
+            <li>スマホ最適化されたカードUI</li>
+            <li>SOLD / NEW / SALE の視認性向上</li>
+            <li>localStorageを使った簡易カート保持</li>
+            <li>日本語/英語の表示切替</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="controls">
+        <input class="field" id="search" placeholder="商品名・商品番号で検索" />
+        <select class="field" id="category">
+          <option value="all">全カテゴリ</option>
+          <option value="bag">バッグ</option>
+          <option value="jewelry">ジュエリー</option>
+          <option value="cloth">衣類</option>
+          <option value="antique">雑貨/アンティーク</option>
+        </select>
+        <select class="field" id="sort">
+          <option value="newest">新着順</option>
+          <option value="priceAsc">価格: 低い順</option>
+          <option value="priceDesc">価格: 高い順</option>
+          <option value="saleFirst">SALE優先</option>
+        </select>
+        <button class="btn" id="clearFilter">クリア</button>
+      </div>
+
+      <div class="results-meta">
+        <div id="resultCount">0件</div>
+        <div id="resultHint">デモデータ表示中</div>
+      </div>
+
+      <div class="products" id="products"></div>
+      <div class="pager" id="pager"></div>
+    </section>
+
+    <section class="info">
+      <article class="panel">
+        <h3 id="newsTitle">NEWS / 更新情報</h3>
+        <ul id="newsList">
+          <li>3月15日: 春の入荷分を追加予定</li>
+          <li>2月28日: サイト操作性改善テスト開始</li>
+          <li>2月10日: SALE対象アイテム更新</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h3 id="shippingTitle">支払い・配送 (デモ表示)</h3>
+        <ul id="shippingList">
+          <li>送料は注文後に最終確認</li>
+          <li>PayPal / カード / 銀行送金に対応</li>
+          <li>海外発送時は地域別レート</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h3 id="policyTitle">ショップポリシー</h3>
+        <p id="policyText">一点もの商品のため、在庫反映のタイミングで売り切れになる場合があります。静的サイトでも、情報構造を整理すると購入導線を大きく改善できます。</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">© PMGB Static Redesign Concept / File: index_codex_gpt5.3.html</div>
+  </footer>
+
+  <aside class="cart" id="cart" aria-label="Shopping cart">
+    <div class="cart-head">
+      <strong id="cartTitle">カート</strong>
+      <button class="chip" id="closeCart">閉じる</button>
+    </div>
+    <div class="cart-list" id="cartList"></div>
+    <div class="cart-foot">
+      <div><strong id="subtotalLabel">小計</strong>: ¥<span id="subtotal">0</span></div>
+      <button class="btn" id="clearCart">カートを空にする</button>
+      <div class="mini" id="cartNote">※ このデモでは注文送信は行いません。カート情報はブラウザ保存のみです。</div>
+    </div>
+  </aside>
+
+  <script>
+    const products = [
+      { id: "Sajou0028", ja: "サジュー刺繍バッグ", en: "Sajou Embroidery Bag", category: "bag", price: 16800, weight: "420g", isNew: true, isSale: false, sold: false, order: 8 },
+      { id: "Bijou0142", ja: "ヴィンテージガラスネックレス", en: "Vintage Glass Necklace", category: "jewelry", price: 9800, weight: "60g", isNew: true, isSale: true, sold: false, order: 10 },
+      { id: "Textile052", ja: "リネンレースブラウス", en: "Linen Lace Blouse", category: "cloth", price: 12400, weight: "180g", isNew: false, isSale: false, sold: false, order: 4 },
+      { id: "Antiq311", ja: "真鍮フレームミラー", en: "Brass Frame Mirror", category: "antique", price: 15300, weight: "700g", isNew: false, isSale: true, sold: false, order: 6 },
+      { id: "Bag2011", ja: "レザーハンドルバスケット", en: "Leather Handle Basket", category: "bag", price: 14100, weight: "520g", isNew: false, isSale: false, sold: true, order: 5 },
+      { id: "Bijou099", ja: "パールボタンイヤリング", en: "Pearl Button Earrings", category: "jewelry", price: 7200, weight: "45g", isNew: false, isSale: false, sold: false, order: 3 },
+      { id: "Textile099", ja: "アンティークリネンクロス", en: "Antique Linen Cloth", category: "cloth", price: 5800, weight: "130g", isNew: true, isSale: false, sold: false, order: 11 },
+      { id: "Antiq441", ja: "木製ソーイングボックス", en: "Wood Sewing Box", category: "antique", price: 11800, weight: "840g", isNew: false, isSale: false, sold: true, order: 2 },
+      { id: "Bag3410", ja: "フレンチトート 1950s", en: "French Tote 1950s", category: "bag", price: 18900, weight: "460g", isNew: true, isSale: true, sold: false, order: 12 },
+      { id: "Bijou242", ja: "シルバーモチーフブローチ", en: "Silver Motif Brooch", category: "jewelry", price: 8600, weight: "55g", isNew: false, isSale: true, sold: false, order: 7 },
+      { id: "Textile710", ja: "ヴィクトリアンナイトドレス", en: "Victorian Night Dress", category: "cloth", price: 21900, weight: "270g", isNew: true, isSale: false, sold: false, order: 9 },
+      { id: "Antiq810", ja: "小型オイルランプ", en: "Small Oil Lamp", category: "antique", price: 9900, weight: "360g", isNew: false, isSale: false, sold: false, order: 1 }
+    ];
+
+    const categoryNames = {
+      ja: {
+        all: "全カテゴリ",
+        bag: "バッグ",
+        jewelry: "ジュエリー",
+        cloth: "衣類",
+        antique: "雑貨/アンティーク"
+      },
+      en: {
+        all: "All categories",
+        bag: "Bags",
+        jewelry: "Jewelry",
+        cloth: "Clothing",
+        antique: "Antiques"
+      }
+    };
+
+    const i18n = {
+      ja: {
+        topline: "次回更新: 2026-03-15 / 静的デモページ (HTML + JavaScript)",
+        subtitle: "PRODUCTS MANAGEMENT GLOBAL BEAUTY",
+        eyebrow: "CURATED VINTAGE MARKET",
+        heroTitle: "古いものに、次の価値を。",
+        heroLead: "PMGBのトップページ改善案です。カテゴリ検索、ページング、SOLD表示、簡易カートを1ページで分かりやすく整理しました。サーバー改修なしでも、見た目と操作性をここまで改善できます。",
+        kpi1Label: "掲載アイテム数",
+        kpi2Label: "主要カテゴリ",
+        kpi3Label: "注文受付",
+        sideTitle: "この静的デモで示している改善",
+        sideList: [
+          "商品検索・カテゴリ絞り込み・並び替え",
+          "スマホ最適化されたカードUI",
+          "SOLD / NEW / SALE の視認性向上",
+          "localStorageを使った簡易カート保持",
+          "日本語/英語の表示切替"
+        ],
+        searchPlaceholder: "商品名・商品番号で検索",
+        clearFilter: "クリア",
+        resultHint: "デモデータ表示中",
+        resultCount: (n) => `${n}件`,
+        noItems: "条件に一致する商品がありません。",
+        sortNewest: "新着順",
+        sortPriceAsc: "価格: 低い順",
+        sortPriceDesc: "価格: 高い順",
+        sortSaleFirst: "SALE優先",
+        addCart: "カートに入れる",
+        sold: "売約済み",
+        weight: "重量",
+        newsTitle: "NEWS / 更新情報",
+        shippingTitle: "支払い・配送 (デモ表示)",
+        policyTitle: "ショップポリシー",
+        newsList: [
+          "3月15日: 春の入荷分を追加予定",
+          "2月28日: サイト操作性改善テスト開始",
+          "2月10日: SALE対象アイテム更新"
+        ],
+        shippingList: [
+          "送料は注文後に最終確認",
+          "PayPal / カード / 銀行送金に対応",
+          "海外発送時は地域別レート"
+        ],
+        policyText: "一点もの商品のため、在庫反映のタイミングで売り切れになる場合があります。静的サイトでも、情報構造を整理すると購入導線を大きく改善できます。",
+        cart: "カート",
+        close: "閉じる",
+        subtotal: "小計",
+        clearCart: "カートを空にする",
+        cartNote: "※ このデモでは注文送信は行いません。カート情報はブラウザ保存のみです。",
+        emptyCart: "カートは空です",
+        inCart: "個"
+      },
+      en: {
+        topline: "Next update: 2026-03-15 / Static demo page (HTML + JavaScript)",
+        subtitle: "PRODUCTS MANAGEMENT GLOBAL BEAUTY",
+        eyebrow: "CURATED VINTAGE MARKET",
+        heroTitle: "Give old pieces a new value.",
+        heroLead: "This is a top-page redesign concept for PMGB. It demonstrates category filtering, pagination, SOLD labels, and a simple cart experience in one static page without backend changes.",
+        kpi1Label: "Listed items",
+        kpi2Label: "Main categories",
+        kpi3Label: "Ordering",
+        sideTitle: "Improvements shown in this static demo",
+        sideList: [
+          "Search, filter, and sort products",
+          "Mobile-first product card UI",
+          "Clear SOLD / NEW / SALE visibility",
+          "Simple cart persistence with localStorage",
+          "Japanese / English language toggle"
+        ],
+        searchPlaceholder: "Search by name or item code",
+        clearFilter: "Clear",
+        resultHint: "Showing demo data",
+        resultCount: (n) => `${n} items`,
+        noItems: "No items matched your filter.",
+        sortNewest: "Newest",
+        sortPriceAsc: "Price: Low to High",
+        sortPriceDesc: "Price: High to Low",
+        sortSaleFirst: "Sale first",
+        addCart: "Add to cart",
+        sold: "SOLD",
+        weight: "Weight",
+        newsTitle: "NEWS / Updates",
+        shippingTitle: "Payment & Shipping (demo)",
+        policyTitle: "Shop Policy",
+        newsList: [
+          "Mar 15: New spring arrivals planned",
+          "Feb 28: UX improvement test started",
+          "Feb 10: SALE item lineup updated"
+        ],
+        shippingList: [
+          "Final shipping fee is confirmed after order",
+          "PayPal / Card / Bank transfer supported",
+          "International shipping by region"
+        ],
+        policyText: "As each item is unique, stock can sell out before synchronization. Even with a static site, better information structure can improve conversion.",
+        cart: "Cart",
+        close: "Close",
+        subtotal: "Subtotal",
+        clearCart: "Empty cart",
+        cartNote: "* Demo only. No checkout action is performed. Cart is stored in browser only.",
+        emptyCart: "Cart is empty",
+        inCart: "pcs"
+      }
+    };
+
+    const state = {
+      lang: "ja",
+      query: "",
+      category: "all",
+      sort: "newest",
+      page: 1,
+      perPage: 6,
+      cart: []
+    };
+
+    const dom = {
+      search: document.getElementById("search"),
+      category: document.getElementById("category"),
+      sort: document.getElementById("sort"),
+      clearFilter: document.getElementById("clearFilter"),
+      products: document.getElementById("products"),
+      pager: document.getElementById("pager"),
+      resultCount: document.getElementById("resultCount"),
+      resultHint: document.getElementById("resultHint"),
+      cartCount: document.getElementById("cartCount"),
+      openCart: document.getElementById("openCart"),
+      closeCart: document.getElementById("closeCart"),
+      cart: document.getElementById("cart"),
+      cartList: document.getElementById("cartList"),
+      subtotal: document.getElementById("subtotal"),
+      clearCart: document.getElementById("clearCart"),
+      langBtn: document.getElementById("langBtn")
+    };
+
+    function loadCart() {
+      try {
+        const raw = localStorage.getItem("pmgb_demo_cart_v1");
+        state.cart = raw ? JSON.parse(raw) : [];
+      } catch {
+        state.cart = [];
+      }
+    }
+
+    function saveCart() {
+      localStorage.setItem("pmgb_demo_cart_v1", JSON.stringify(state.cart));
+    }
+
+    function yen(v) {
+      return new Intl.NumberFormat("ja-JP").format(v);
+    }
+
+    function filteredProducts() {
+      const q = state.query.trim().toLowerCase();
+      let items = products.filter((p) => {
+        if (state.category !== "all" && p.category !== state.category) return false;
+        if (!q) return true;
+        return [p.id, p.ja, p.en].join(" ").toLowerCase().includes(q);
+      });
+
+      items = items.sort((a, b) => {
+        if (state.sort === "priceAsc") return a.price - b.price;
+        if (state.sort === "priceDesc") return b.price - a.price;
+        if (state.sort === "saleFirst") {
+          if (a.isSale === b.isSale) return b.order - a.order;
+          return a.isSale ? -1 : 1;
+        }
+        return b.order - a.order;
+      });
+
+      return items;
+    }
+
+    function cardMarkup(p, index) {
+      const t = i18n[state.lang];
+      const title = state.lang === "ja" ? p.ja : p.en;
+      const badges = [];
+      if (p.isNew) badges.push('<span class="tag tag-new">NEW</span>');
+      if (p.isSale) badges.push('<span class="tag tag-sale">SALE</span>');
+      if (p.sold) badges.push(`<span class="tag tag-sold">${t.sold}</span>`);
+
+      return `
+        <article class="card" style="animation-delay:${Math.min(index * 0.04, 0.24)}s">
+          <div class="thumb cat-${p.category}"><span>${categoryNames[state.lang][p.category]}</span></div>
+          <div class="card-body">
+            <div class="badges">${badges.join("")}</div>
+            <h3 class="title">${title}</h3>
+            <div class="meta"><span>${p.id}</span><span>${t.weight}: ${p.weight}</span></div>
+            <div class="price-row">
+              <div class="price ${p.sold ? "sold" : ""}">¥${yen(p.price)}</div>
+              <button class="buy" data-id="${p.id}" ${p.sold ? "disabled" : ""}>${p.sold ? t.sold : t.addCart}</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderProducts() {
+      const t = i18n[state.lang];
+      const list = filteredProducts();
+      const totalPages = Math.max(1, Math.ceil(list.length / state.perPage));
+      if (state.page > totalPages) state.page = totalPages;
+
+      const start = (state.page - 1) * state.perPage;
+      const pageItems = list.slice(start, start + state.perPage);
+
+      dom.products.innerHTML = pageItems.length
+        ? pageItems.map(cardMarkup).join("")
+        : `<div class="empty">${t.noItems}</div>`;
+
+      dom.resultCount.textContent = t.resultCount(list.length);
+      renderPager(totalPages);
+    }
+
+    function renderPager(totalPages) {
+      if (totalPages <= 1) {
+        dom.pager.innerHTML = "";
+        return;
+      }
+
+      let html = "";
+      for (let i = 1; i <= totalPages; i++) {
+        html += `<button class="page-btn ${state.page === i ? "active" : ""}" data-page="${i}">${i}</button>`;
+      }
+      dom.pager.innerHTML = html;
+    }
+
+    function addToCart(id) {
+      const target = products.find((p) => p.id === id);
+      if (!target || target.sold) return;
+      const row = state.cart.find((c) => c.id === id);
+      if (row) row.qty += 1;
+      else state.cart.push({ id, qty: 1 });
+      saveCart();
+      renderCart();
+    }
+
+    function renderCart() {
+      const t = i18n[state.lang];
+      const rows = state.cart
+        .map((c) => {
+          const p = products.find((x) => x.id === c.id);
+          if (!p) return null;
+          const title = state.lang === "ja" ? p.ja : p.en;
+          return {
+            title,
+            qty: c.qty,
+            price: p.price,
+            total: p.price * c.qty
+          };
+        })
+        .filter(Boolean);
+
+      const count = rows.reduce((n, r) => n + r.qty, 0);
+      const subtotal = rows.reduce((n, r) => n + r.total, 0);
+
+      dom.cartCount.textContent = String(count);
+      if (!rows.length) {
+        dom.cartList.innerHTML = `<div class="empty">${t.emptyCart}</div>`;
+      } else {
+        dom.cartList.innerHTML = rows
+          .map((r) => `
+            <div class="cart-item">
+              <strong>${r.title}</strong>
+              <div>${r.qty} ${t.inCart}</div>
+              <div>¥${yen(r.total)}</div>
+            </div>
+          `)
+          .join("");
+      }
+
+      dom.subtotal.textContent = yen(subtotal);
+    }
+
+    function applyText() {
+      const t = i18n[state.lang];
+      const set = (id, value) => {
+        document.getElementById(id).textContent = value;
+      };
+
+      set("topline", t.topline);
+      set("subtitle", t.subtitle);
+      set("eyebrow", t.eyebrow);
+      set("heroTitle", t.heroTitle);
+      set("heroLead", t.heroLead);
+      set("kpi1Label", t.kpi1Label);
+      set("kpi2Label", t.kpi2Label);
+      set("kpi3Label", t.kpi3Label);
+      set("sideTitle", t.sideTitle);
+      set("resultHint", t.resultHint);
+      set("newsTitle", t.newsTitle);
+      set("shippingTitle", t.shippingTitle);
+      set("policyTitle", t.policyTitle);
+      set("policyText", t.policyText);
+      set("cartTitle", t.cart);
+      set("closeCart", t.close);
+      set("subtotalLabel", t.subtotal);
+      set("clearCart", t.clearCart);
+      set("cartNote", t.cartNote);
+
+      dom.search.placeholder = t.searchPlaceholder;
+      dom.clearFilter.textContent = t.clearFilter;
+      dom.langBtn.textContent = state.lang === "ja" ? "EN" : "JP";
+
+      const sideList = document.getElementById("sideList");
+      sideList.innerHTML = t.sideList.map((x) => `<li>${x}</li>`).join("");
+      const newsList = document.getElementById("newsList");
+      newsList.innerHTML = t.newsList.map((x) => `<li>${x}</li>`).join("");
+      const shippingList = document.getElementById("shippingList");
+      shippingList.innerHTML = t.shippingList.map((x) => `<li>${x}</li>`).join("");
+
+      const catOptions = [...dom.category.options];
+      catOptions.forEach((opt) => {
+        opt.textContent = categoryNames[state.lang][opt.value];
+      });
+
+      const sortOptions = [...dom.sort.options];
+      sortOptions[0].textContent = t.sortNewest;
+      sortOptions[1].textContent = t.sortPriceAsc;
+      sortOptions[2].textContent = t.sortPriceDesc;
+      sortOptions[3].textContent = t.sortSaleFirst;
+
+      dom.openCart.innerHTML = `${t.cart} <span id="cartCount">${dom.cartCount.textContent}</span>`;
+      dom.cartCount = document.getElementById("cartCount");
+    }
+
+    function bindEvents() {
+      dom.search.addEventListener("input", (e) => {
+        state.query = e.target.value;
+        state.page = 1;
+        renderProducts();
+      });
+
+      dom.category.addEventListener("change", (e) => {
+        state.category = e.target.value;
+        state.page = 1;
+        renderProducts();
+      });
+
+      dom.sort.addEventListener("change", (e) => {
+        state.sort = e.target.value;
+        state.page = 1;
+        renderProducts();
+      });
+
+      dom.clearFilter.addEventListener("click", () => {
+        state.query = "";
+        state.category = "all";
+        state.sort = "newest";
+        state.page = 1;
+        dom.search.value = "";
+        dom.category.value = "all";
+        dom.sort.value = "newest";
+        renderProducts();
+      });
+
+      dom.products.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-id]");
+        if (!btn) return;
+        addToCart(btn.dataset.id);
+      });
+
+      dom.pager.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-page]");
+        if (!btn) return;
+        state.page = Number(btn.dataset.page);
+        renderProducts();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      dom.openCart.addEventListener("click", () => {
+        dom.cart.classList.add("open");
+      });
+
+      dom.closeCart.addEventListener("click", () => {
+        dom.cart.classList.remove("open");
+      });
+
+      dom.clearCart.addEventListener("click", () => {
+        state.cart = [];
+        saveCart();
+        renderCart();
+      });
+
+      dom.langBtn.addEventListener("click", () => {
+        state.lang = state.lang === "ja" ? "en" : "ja";
+        applyText();
+        renderProducts();
+        renderCart();
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") dom.cart.classList.remove("open");
+      });
+    }
+
+    loadCart();
+    bindEvents();
+    applyText();
+    renderProducts();
+    renderCart();
+  </script>
+</body>
+</html>

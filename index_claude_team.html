@@ -1,0 +1,1656 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Petit mignon Grand beau - フレンチアンティークのお店</title>
+  <meta name="description" content="フランス ブルターニュ地方の蚤の市をそのまま日本へ。カフェオレボウル、食器類、家具、ソーイング雑貨などフレンチアンティーク雑貨の通販。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================================================
+       CSS Variables
+       ======================================================================== */
+    :root {
+      --color-bg: #FAF8F5;
+      --color-bg-alt: #F0EBE4;
+      --color-white: #FFFFFF;
+      --color-text-primary: #4A4A4A;
+      --color-text-secondary: #6B6B6B;
+      --color-text-muted: #999;
+      --color-accent: #8B7355;
+      --color-accent-hover: #6F5B42;
+      --color-secondary: #C4956A;
+      --color-highlight: #D4A574;
+      --color-header-bg: #3D3229;
+      --color-border: #E0D8CE;
+      --color-border-light: #EDE8E2;
+      --color-error: #C0392B;
+      --color-success: #27AE60;
+      --color-sale: #C0392B;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Noto Sans JP', 'Lato', sans-serif;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --transition: 0.3s ease;
+      --header-height: 70px;
+    }
+
+    /* ========================================================================
+       Reset & Base
+       ======================================================================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--color-text-primary);
+      background-color: var(--color-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--color-accent); text-decoration: none; transition: color var(--transition); }
+    a:hover { color: var(--color-accent-hover); }
+    button { border: none; background: none; cursor: pointer; font-family: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+    ul { list-style: none; }
+
+    /* ========================================================================
+       Announcement Bar
+       ======================================================================== */
+    .announcement-bar {
+      background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-secondary) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .announcement-bar strong { font-weight: 700; }
+
+    /* ========================================================================
+       Header
+       ======================================================================== */
+    .site-header {
+      background: var(--color-header-bg);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+    }
+    .logo-main {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+    .logo-main span { color: var(--color-highlight); }
+    .logo-sub {
+      font-size: 10px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.5px;
+    }
+    .header-nav {
+      display: none;
+      gap: 28px;
+    }
+    .header-nav a {
+      color: rgba(255,255,255,0.8);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: color var(--transition);
+    }
+    .header-nav a:hover { color: var(--color-highlight); }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .header-btn {
+      color: rgba(255,255,255,0.8);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all var(--transition);
+      position: relative;
+    }
+    .header-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .header-btn svg { width: 22px; height: 22px; }
+    .cart-badge {
+      position: absolute;
+      top: 2px; right: 2px;
+      background: var(--color-sale);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-badge:empty { display: none; }
+
+    /* Hamburger */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 24px;
+      padding: 8px 0;
+    }
+    .hamburger span {
+      display: block;
+      height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: all var(--transition);
+    }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--header-height);
+      left: 0; right: 0; bottom: 0;
+      background: var(--color-header-bg);
+      z-index: 99;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .mobile-menu.active { display: block; }
+    .mobile-menu a {
+      display: block;
+      color: rgba(255,255,255,0.85);
+      padding: 14px 0;
+      font-size: 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-menu a:hover { color: var(--color-highlight); }
+
+    /* ========================================================================
+       Hero
+       ======================================================================== */
+    .hero {
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #3D3229 0%, #5A4A3A 50%, #8B7355 100%);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="p" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.03)"/></pattern></defs><rect width="100" height="100" fill="url(%23p)"/></svg>');
+      opacity: 0.5;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .hero-title span { color: var(--color-highlight); }
+    .hero-subtitle {
+      font-size: clamp(14px, 2vw, 17px);
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 32px;
+      line-height: 1.8;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-highlight);
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all var(--transition);
+    }
+    .hero-cta:hover {
+      background: #e0b88a;
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212,165,116,0.4);
+    }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-value {
+      font-family: var(--font-heading);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--color-highlight);
+    }
+    .hero-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
+    }
+
+    /* ========================================================================
+       Category Filter
+       ======================================================================== */
+    .category-filter {
+      background: var(--color-white);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: var(--header-height);
+      z-index: 50;
+    }
+    .category-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .category-inner::-webkit-scrollbar { display: none; }
+    .category-btn {
+      flex-shrink: 0;
+      padding: 12px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      border-bottom: 2px solid transparent;
+      transition: all var(--transition);
+      white-space: nowrap;
+    }
+    .category-btn:hover { color: var(--color-accent); }
+    .category-btn.active {
+      color: var(--color-accent);
+      border-bottom-color: var(--color-accent);
+      font-weight: 700;
+    }
+    .category-btn .cat-icon {
+      display: inline-block;
+      margin-right: 6px;
+      font-size: 16px;
+    }
+
+    /* ========================================================================
+       Search Bar
+       ======================================================================== */
+    .search-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 400px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 10px 16px 10px 42px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-family: var(--font-body);
+      background: var(--color-white);
+      transition: border-color var(--transition);
+      color: var(--color-text-primary);
+    }
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 3px rgba(139,115,85,0.1);
+    }
+    .search-box input::placeholder { color: var(--color-text-muted); }
+    .search-box svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px; height: 18px;
+      color: var(--color-text-muted);
+    }
+    .results-count {
+      font-size: 13px;
+      color: var(--color-text-muted);
+    }
+    .sort-select {
+      padding: 8px 32px 8px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: var(--font-body);
+      color: var(--color-text-primary);
+      background: var(--color-white);
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234A4A4A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      cursor: pointer;
+    }
+
+    /* ========================================================================
+       Main Content Layout
+       ======================================================================== */
+    .main-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+      display: flex;
+      gap: 40px;
+    }
+    .products-area { flex: 1; min-width: 0; }
+    .sidebar {
+      width: 260px;
+      flex-shrink: 0;
+      display: none;
+    }
+
+    /* ========================================================================
+       Product Grid
+       ======================================================================== */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .product-card {
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--color-border-light);
+      transition: all var(--transition);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .product-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .product-card.sold-out { opacity: 0.65; }
+    .product-card.sold-out .product-image-wrap::after {
+      content: 'SOLD OUT';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+    .product-image-wrap {
+      position: relative;
+      padding-top: 100%;
+      overflow: hidden;
+      background: var(--color-bg-alt);
+    }
+    .product-image-wrap img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .product-card:hover .product-image-wrap img {
+      transform: scale(1.08);
+    }
+    .product-badge {
+      position: absolute;
+      top: 12px; left: 12px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .badge-new { background: var(--color-accent); color: #fff; }
+    .badge-sale { background: var(--color-sale); color: #fff; }
+    .product-quick-add {
+      position: absolute;
+      bottom: 12px;
+      left: 12px; right: 12px;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all var(--transition);
+    }
+    .product-card:hover .product-quick-add {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .btn-add-cart {
+      width: 100%;
+      padding: 10px;
+      background: var(--color-accent);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-add-cart:hover { background: var(--color-accent-hover); }
+    .btn-add-cart svg { width: 16px; height: 16px; }
+    .product-body {
+      padding: 16px;
+    }
+    .product-category-label {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .product-name {
+      font-family: var(--font-heading);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 2px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .product-name-en {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    .product-price-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .product-price {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+    .product-price-original {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      text-decoration: line-through;
+    }
+    .product-price.sale { color: var(--color-sale); }
+    .product-id {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--color-text-muted);
+    }
+    .empty-state svg { width: 64px; height: 64px; margin-bottom: 16px; opacity: 0.3; }
+    .empty-state h3 {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      color: var(--color-text-secondary);
+      margin-bottom: 8px;
+    }
+
+    /* ========================================================================
+       Sidebar
+       ======================================================================== */
+    .sidebar-section {
+      margin-bottom: 32px;
+    }
+    .sidebar-title {
+      font-family: var(--font-heading);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--color-border);
+    }
+    .sidebar-links a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 0;
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      transition: all var(--transition);
+    }
+    .sidebar-links a:hover {
+      color: var(--color-accent);
+      padding-left: 6px;
+    }
+    .sidebar-links a svg { width: 14px; height: 14px; opacity: 0.5; flex-shrink: 0; }
+    .sidebar-widget {
+      background: var(--color-white);
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .sidebar-widget h4 {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .sidebar-widget p {
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .newsletter-form input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-family: var(--font-body);
+    }
+    .newsletter-form input:focus { outline: none; border-color: var(--color-accent); }
+    .newsletter-form button {
+      padding: 8px 14px;
+      background: var(--color-accent);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      transition: background var(--transition);
+    }
+    .newsletter-form button:hover { background: var(--color-accent-hover); }
+    .social-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .social-link {
+      width: 36px; height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      color: var(--color-text-muted);
+      transition: all var(--transition);
+    }
+    .social-link:hover {
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+      transform: translateY(-2px);
+    }
+    .social-link svg { width: 16px; height: 16px; }
+
+    /* ========================================================================
+       Cart Drawer
+       ======================================================================== */
+    .cart-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 200;
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+    .cart-overlay.active { display: block; opacity: 1; }
+    .cart-drawer {
+      position: fixed;
+      top: 0; right: 0;
+      width: 400px;
+      max-width: 100%;
+      height: 100%;
+      background: var(--color-white);
+      z-index: 201;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: -8px 0 30px rgba(0,0,0,0.15);
+    }
+    .cart-drawer.active { transform: translateX(0); }
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .cart-header h3 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .cart-close {
+      width: 32px; height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background var(--transition);
+    }
+    .cart-close:hover { background: var(--color-bg-alt); }
+    .cart-close svg { width: 20px; height: 20px; }
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 24px;
+    }
+    .cart-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+    .cart-item-image {
+      width: 70px; height: 70px;
+      border-radius: var(--radius-sm);
+      object-fit: cover;
+      background: var(--color-bg-alt);
+    }
+    .cart-item-info { flex: 1; }
+    .cart-item-name {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      line-height: 1.4;
+    }
+    .cart-item-price {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .qty-btn {
+      width: 26px; height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      color: var(--color-text-secondary);
+      transition: all var(--transition);
+    }
+    .qty-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+    .qty-value { font-size: 13px; font-weight: 500; min-width: 20px; text-align: center; }
+    .cart-item-remove {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      margin-top: 4px;
+      transition: color var(--transition);
+    }
+    .cart-item-remove:hover { color: var(--color-error); }
+    .cart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--color-text-muted);
+      text-align: center;
+      padding: 40px;
+    }
+    .cart-empty svg { width: 48px; height: 48px; opacity: 0.3; margin-bottom: 16px; }
+    .cart-empty p { font-size: 14px; }
+    .cart-footer {
+      padding: 20px 24px;
+      border-top: 1px solid var(--color-border);
+      background: var(--color-bg);
+    }
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .cart-total-label { font-size: 14px; color: var(--color-text-secondary); }
+    .cart-total-value {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--color-text-primary);
+    }
+    .cart-shipping-note {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      margin-bottom: 16px;
+    }
+    .btn-checkout {
+      width: 100%;
+      padding: 14px;
+      background: var(--color-accent);
+      color: #fff;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: all var(--transition);
+    }
+    .btn-checkout:hover {
+      background: var(--color-accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(139,115,85,0.3);
+    }
+
+    /* ========================================================================
+       Toast
+       ======================================================================== */
+    .toast-container {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--color-header-bg);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      box-shadow: var(--shadow-lg);
+      animation: slideInRight 0.4s ease, fadeOut 0.4s ease 2.6s forwards;
+      border-left: 3px solid var(--color-success);
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateX(50px); }
+    }
+
+    /* ========================================================================
+       Footer
+       ======================================================================== */
+    .site-footer {
+      background: var(--color-header-bg);
+      color: rgba(240,232,223,0.8);
+      padding: 60px 0 24px;
+      margin-top: 60px;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-brand-name {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .footer-brand-name span { color: var(--color-highlight); }
+    .footer-brand-text {
+      font-size: 13px;
+      color: rgba(240,232,223,0.6);
+      line-height: 1.7;
+    }
+    .footer-heading {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+    .footer-links a {
+      display: block;
+      font-size: 13px;
+      color: rgba(240,232,223,0.55);
+      padding: 4px 0;
+      transition: all var(--transition);
+    }
+    .footer-links a:hover { color: var(--color-highlight); padding-left: 4px; }
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(240,232,223,0.55);
+      margin-bottom: 8px;
+    }
+    .footer-contact-item svg { width: 14px; height: 14px; flex-shrink: 0; margin-top: 3px; opacity: 0.5; }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .footer-social a {
+      width: 36px; height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      color: rgba(240,232,223,0.6);
+      transition: all var(--transition);
+    }
+    .footer-social a:hover {
+      border-color: var(--color-highlight);
+      color: var(--color-highlight);
+      transform: translateY(-2px);
+    }
+    .footer-social a svg { width: 16px; height: 16px; }
+    .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+    }
+    .footer-copyright {
+      font-size: 12px;
+      color: rgba(240,232,223,0.35);
+    }
+    .footer-legal {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer-legal a {
+      font-size: 11px;
+      color: rgba(240,232,223,0.35);
+    }
+    .footer-legal a:hover { color: var(--color-highlight); }
+
+    /* ========================================================================
+       Responsive
+       ======================================================================== */
+    @media (min-width: 768px) {
+      .header-nav { display: flex; }
+      .hamburger { display: none; }
+      .hero { min-height: 55vh; padding: 80px 40px; }
+      .category-inner { justify-content: center; flex-wrap: wrap; }
+      .footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+      .footer-bottom { flex-direction: row; justify-content: space-between; }
+      .product-grid { gap: 28px; }
+    }
+    @media (min-width: 1024px) {
+      .sidebar { display: block; }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+      .footer-grid { grid-template-columns: 1.5fr 1fr 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero-stats { gap: 24px; }
+      .hero-stat-value { font-size: 22px; }
+      .search-section { flex-direction: column; align-items: stretch; }
+      .search-box { max-width: none; }
+      .toast-container { left: 16px; right: 16px; bottom: 16px; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Print */
+    @media print {
+      .site-header, .category-filter, .cart-overlay, .cart-drawer,
+      .announcement-bar, .toast-container, .search-section,
+      .product-quick-add, .hamburger, .mobile-menu { display: none !important; }
+      .main-content { display: block !important; }
+      .sidebar { display: none !important; }
+      .product-grid { grid-template-columns: 1fr 1fr !important; }
+      .product-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <strong>2月24日更新</strong> &#8212; 新入荷商品50点追加 &amp; ワゴンセール76点 <strong>50%OFF!</strong> 次回更新: 3月10日（火）
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="#" class="logo">
+        <div class="logo-main"><span>P</span>etit mignon <span>G</span>rand beau</div>
+        <div class="logo-sub">French Antiques since 2004</div>
+      </a>
+      <nav class="header-nav">
+        <a href="#">ホーム</a>
+        <a href="#">初めての方へ</a>
+        <a href="#">ご利用案内</a>
+        <a href="#">お店について</a>
+        <a href="#">ブログ</a>
+        <a href="#">お問い合わせ</a>
+      </nav>
+      <div class="header-actions">
+        <!-- Search toggle -->
+        <button class="header-btn" onclick="document.querySelector('.search-box input').focus()" aria-label="検索">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </button>
+        <!-- Cart -->
+        <button class="header-btn" onclick="toggleCart()" aria-label="カート">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span class="cart-badge" id="cartBadge"></span>
+        </button>
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="メニュー">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#">ホーム</a>
+    <a href="#">初めてのお客様へ</a>
+    <a href="#">ご利用案内</a>
+    <a href="#">訪問販売法に基づく表記</a>
+    <a href="#">お店について</a>
+    <a href="#">会社哲学</a>
+    <a href="#">販売店様へ（卸売り）</a>
+    <a href="#">お問い合わせ（FAQ）</a>
+    <a href="#">送料について</a>
+    <a href="#">ブログ</a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        フランス<span>・</span>ブルターニュの<br>蚤の市から届く宝物
+      </h1>
+      <p class="hero-subtitle">
+        蚤の市で見つけた品々をそのままの状態で日本へ。<br>
+        隔週火曜日、新しいアンティークとの出会いをお届けしています。
+      </p>
+      <a href="#products" class="hero-cta">
+        商品を見る
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V7.8H7.8"/></svg>
+      </a>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value">20+</div>
+          <div class="hero-stat-label">年の実績</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">50</div>
+          <div class="hero-stat-label">新入荷商品</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value">76</div>
+          <div class="hero-stat-label">セール品</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Filter -->
+  <div class="category-filter" id="products">
+    <div class="category-inner">
+      <button class="category-btn active" onclick="filterCategory('all', this)">
+        <span class="cat-icon">&#9733;</span>すべて
+      </button>
+      <button class="category-btn" onclick="filterCategory('bowl', this)">
+        <span class="cat-icon">&#9749;</span>カフェオレボウル
+      </button>
+      <button class="category-btn" onclick="filterCategory('tableware', this)">
+        <span class="cat-icon">&#127869;</span>食器類
+      </button>
+      <button class="category-btn" onclick="filterCategory('cookware', this)">
+        <span class="cat-icon">&#127859;</span>調理器具
+      </button>
+      <button class="category-btn" onclick="filterCategory('furniture', this)">
+        <span class="cat-icon">&#128722;</span>家具
+      </button>
+      <button class="category-btn" onclick="filterCategory('accessories', this)">
+        <span class="cat-icon">&#128142;</span>小物類
+      </button>
+      <button class="category-btn" onclick="filterCategory('sewing', this)">
+        <span class="cat-icon">&#129525;</span>ソーイング雑貨
+      </button>
+      <button class="category-btn" onclick="filterCategory('paper', this)">
+        <span class="cat-icon">&#128220;</span>紙製品
+      </button>
+      <button class="category-btn" onclick="filterCategory('toys', this)">
+        <span class="cat-icon">&#127912;</span>おもちゃ
+      </button>
+      <button class="category-btn" onclick="filterCategory('sale', this)">
+        <span class="cat-icon">&#128176;</span>セール
+      </button>
+    </div>
+  </div>
+
+  <!-- Search Section -->
+  <div class="search-section">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="商品を検索...">
+    </div>
+    <span class="results-count" id="resultsCount"></span>
+    <select class="sort-select" id="sortSelect" onchange="sortProducts()">
+      <option value="newest">新着順</option>
+      <option value="price-asc">価格: 安い順</option>
+      <option value="price-desc">価格: 高い順</option>
+      <option value="name">名前順</option>
+    </select>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="products-area">
+      <div class="product-grid" id="productGrid">
+        <!-- Products rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3 class="sidebar-title">ご案内</h3>
+        <div class="sidebar-links">
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            初めてのお客様へ
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            ご利用案内
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            お支払い方法
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="23 7 16 12 16 2 23 7"/></svg>
+            送料について
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            よくある質問（FAQ）
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            お問い合わせ
+          </a>
+          <a href="#">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            訪問販売法に基づく表記
+          </a>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-widget">
+          <h4>更新のお知らせ</h4>
+          <p>新入荷情報をメールでお届けします。隔週火曜日に更新しています。</p>
+          <div class="newsletter-form">
+            <input type="email" placeholder="メールアドレス">
+            <button>登録</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-widget">
+          <h4>SNS</h4>
+          <p>最新情報はSNSでもチェック!</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/PMGBFRANCE/" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@RenPetitMignonGrandBeau" class="social-link" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#fff"/></svg>
+            </a>
+            <a href="https://www.instagram.com/petitmignongrandbeau/" class="social-link" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://www.etsy.com/shop/PetitMignonGrandBeau/" class="social-link" target="_blank" rel="noopener" aria-label="Etsy">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 3c-.55 0-1 .45-1 1v4H4c-.55 0-1 .45-1 1v2c0 .55.45 1 1 1h3v4c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-4h3c.55 0 1-.45 1-1V9c0-.55-.45-1-1-1h-3V4c0-.55-.45-1-1-1H8z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-widget">
+          <h4>お支払い方法</h4>
+          <p>PayPal（クレジットカード/デビットカード対応）、銀行振込（WISE利用）でお支払いいただけます。</p>
+          <p style="margin-top:8px; font-size:12px; color:var(--color-text-muted);">為替レート: @&yen;189.488（対ユーロ）</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Cart Overlay -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>ショッピングカート</h3>
+      <button class="cart-close" onclick="toggleCart()" aria-label="閉じる">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <!-- Cart items rendered by JS -->
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total-row">
+        <span class="cart-total-label">小計</span>
+        <span class="cart-total-value" id="cartTotal">&yen;0</span>
+      </div>
+      <p class="cart-shipping-note">送料は別途計算されます。フランスからの発送となります。</p>
+      <button class="btn-checkout" onclick="alert('実際のサイトではPayPalまたは銀行振込でお支払いいただけます。')">
+        ご注文手続きへ
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand-name"><span>P</span>etit mignon <span>G</span>rand beau</div>
+          <p class="footer-brand-text">
+            フランス ブルターニュ地方の蚤の市をそのまま日本へ。
+            2004年より、心を込めてアンティークの品々をお届けしています。
+            当店の商品がお安め設定なのは、蚤の市の商品をそのままの状態で日本へお送りしているからです。
+          </p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/PMGBFRANCE/" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            </a>
+            <a href="https://www.youtube.com/@RenPetitMignonGrandBeau" target="_blank" rel="noopener" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#fff"/></svg>
+            </a>
+            <a href="https://www.instagram.com/petitmignongrandbeau/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/></svg>
+            </a>
+            <a href="https://petitmignongrandbeau.blog.fc2.com/" target="_blank" rel="noopener" aria-label="Blog">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">カテゴリ</h4>
+          <div class="footer-links">
+            <a href="#" onclick="filterCategory('bowl')">カフェオレボウル</a>
+            <a href="#" onclick="filterCategory('tableware')">食器類</a>
+            <a href="#" onclick="filterCategory('cookware')">調理器具</a>
+            <a href="#" onclick="filterCategory('furniture')">家具</a>
+            <a href="#" onclick="filterCategory('accessories')">小物類</a>
+            <a href="#" onclick="filterCategory('sewing')">ソーイング雑貨</a>
+            <a href="#" onclick="filterCategory('sale')">セール品</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">インフォメーション</h4>
+          <div class="footer-links">
+            <a href="#">初めてのお客様へ</a>
+            <a href="#">ご利用案内</a>
+            <a href="#">送料について</a>
+            <a href="#">よくある質問</a>
+            <a href="#">お問い合わせ</a>
+            <a href="#">訪問販売法に基づく表記</a>
+          </div>
+        </div>
+        <div>
+          <h4 class="footer-heading">ショップ情報</h4>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>フランス ブルターニュ地方</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            <span>SIRET: 48206108200020</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>定休日: 土・日曜日<br>隔週火曜更新</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">&copy; 2005-2026 Petit mignon Grand beau. All Rights Reserved. Depuis 2004. 画像・文章の無断転載禁止</p>
+        <div class="footer-legal">
+          <a href="#">プライバシーポリシー</a>
+          <a href="#">特定商取引法に基づく表記</a>
+          <a href="#">サイトマップ</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====================================================================
+       JavaScript
+       ==================================================================== -->
+  <script>
+    // ─── Product Data ───────────────────────────────────────────────────
+    const products = [
+      { id: 'PMGB-2601', name: '1920年代 カフェオレボウル リュネヴィル窯', nameEn: 'Bol à café au lait Lunéville 1920s', category: 'bowl', price: 4800, salePrice: null, image: 'https://picsum.photos/seed/pmgb-bowl1/400/400', description: 'リュネヴィル窯の美しい花柄カフェオレボウル。1920年代のフランス製。', soldOut: false, isNew: true },
+      { id: 'PMGB-2602', name: 'カフェオレボウル ディゴワン・サルグミンヌ', nameEn: 'Bol Digoin Sarreguemines', category: 'bowl', price: 5200, salePrice: null, image: 'https://picsum.photos/seed/pmgb-bowl2/400/400', description: 'サルグミンヌ窯のクラシックなカフェオレボウル。青い花模様。', soldOut: false, isNew: true },
+      { id: 'PMGB-2603', name: '古いカフェオレボウル バドンヴィレ窯 薔薇柄', nameEn: 'Bol Badonviller roses', category: 'bowl', price: 3800, salePrice: 1900, image: 'https://picsum.photos/seed/pmgb-bowl3/400/400', description: 'バドンヴィレ窯の薔薇柄カフェオレボウル。使い込まれた味わい。', soldOut: false, isNew: false },
+      { id: 'PMGB-2604', name: 'アンティーク シルバープレート スプーン 6本セット', nameEn: 'Cuillères argentées lot de 6', category: 'tableware', price: 6500, salePrice: null, image: 'https://picsum.photos/seed/pmgb-spoon/400/400', description: 'フランス製シルバープレートのスプーン6本セット。美しい彫刻入り。', soldOut: false, isNew: true },
+      { id: 'PMGB-2605', name: 'コンポティエ 脚付きガラスの器', nameEn: 'Compotier en verre sur pied', category: 'tableware', price: 7200, salePrice: null, image: 'https://picsum.photos/seed/pmgb-comp/400/400', description: 'プレスガラスのコンポティエ。フルーツやお菓子を盛り付けに。', soldOut: false, isNew: false },
+      { id: 'PMGB-2606', name: 'ファイアンス焼き スープ皿 花柄', nameEn: 'Assiette à soupe faïence fleurie', category: 'tableware', price: 3200, salePrice: 1600, image: 'https://picsum.photos/seed/pmgb-plate/400/400', description: '19世紀末のファイアンス焼きスープ皿。淡い花柄が美しい。', soldOut: false, isNew: false },
+      { id: 'PMGB-2607', name: '銅製 片手鍋 木の取っ手', nameEn: 'Casserole en cuivre avec manche en bois', category: 'cookware', price: 12000, salePrice: null, image: 'https://picsum.photos/seed/pmgb-pan/400/400', description: 'フランスの古い銅製片手鍋。木の取っ手が温かみを添えます。', soldOut: false, isNew: true },
+      { id: 'PMGB-2608', name: 'エナメル製 キャニスター CAFE', nameEn: 'Boîte en émail CAFE', category: 'cookware', price: 4500, salePrice: null, image: 'https://picsum.photos/seed/pmgb-can/400/400', description: 'CAFEの文字が入ったエナメル製キャニスター。ブルーの縁取り。', soldOut: false, isNew: false },
+      { id: 'PMGB-2609', name: 'ナポレオン3世時代 小さなキャビネット', nameEn: 'Petit meuble Napoléon III', category: 'furniture', price: 85000, salePrice: null, image: 'https://picsum.photos/seed/pmgb-cab/400/400', description: 'ナポレオン3世時代の小さなキャビネット。繊細な象嵌細工。', soldOut: false, isNew: true },
+      { id: 'PMGB-2610', name: 'アンティーク 木製 小さな棚', nameEn: 'Petite étagère en bois ancien', category: 'furniture', price: 28000, salePrice: 14000, image: 'https://picsum.photos/seed/pmgb-shelf/400/400', description: '壁掛けの小さな木製棚。ペイント剥がれが味わい深い。', soldOut: false, isNew: false },
+      { id: 'PMGB-2611', name: '古いリネンのテーブルクロス モノグラム入り', nameEn: 'Nappe ancienne en lin monogrammée', category: 'accessories', price: 9800, salePrice: null, image: 'https://picsum.photos/seed/pmgb-linen/400/400', description: '手刺繍のモノグラムが入った上質なリネンのテーブルクロス。', soldOut: false, isNew: true },
+      { id: 'PMGB-2612', name: 'アンティーク 真鍮のキャンドルスタンド ペア', nameEn: 'Paire de bougeoirs en laiton', category: 'accessories', price: 7500, salePrice: null, image: 'https://picsum.photos/seed/pmgb-candle/400/400', description: '真鍮のキャンドルスタンドのペア。時を経た美しいパティナ。', soldOut: false, isNew: false },
+      { id: 'PMGB-2613', name: '古い木製の糸巻き 5個セット', nameEn: 'Lot de 5 bobines en bois anciennes', category: 'sewing', price: 2800, salePrice: null, image: 'https://picsum.photos/seed/pmgb-bobbin/400/400', description: 'フランスの古い木製糸巻き5個セット。ディスプレイにも。', soldOut: false, isNew: true },
+      { id: 'PMGB-2614', name: 'Sajou 復刻版 クロスステッチ図案集', nameEn: 'Sajou album de point de croix', category: 'sewing', price: 3500, salePrice: null, image: 'https://picsum.photos/seed/pmgb-sajou/400/400', description: 'メゾン・サジューの復刻版クロスステッチ図案集。', soldOut: false, isNew: false },
+      { id: 'PMGB-2615', name: 'アンティークボタン 貝ボタン 12個', nameEn: 'Lot de 12 boutons en nacre anciens', category: 'sewing', price: 1800, salePrice: 900, image: 'https://picsum.photos/seed/pmgb-btn/400/400', description: '古い貝ボタン12個セット。様々なサイズが混ざっています。', soldOut: false, isNew: false },
+      { id: 'PMGB-2616', name: '1900年代初頭 ポストカード 風景画 5枚', nameEn: 'Lot de 5 cartes postales paysages 1900', category: 'paper', price: 2200, salePrice: null, image: 'https://picsum.photos/seed/pmgb-card/400/400', description: '1900年代初頭のフランスの風景ポストカード5枚セット。', soldOut: false, isNew: true },
+      { id: 'PMGB-2617', name: '古い楽譜 装飾的な表紙', nameEn: 'Partition ancienne couverture ornée', category: 'paper', price: 1500, salePrice: null, image: 'https://picsum.photos/seed/pmgb-music/400/400', description: '美しい装飾表紙の古い楽譜。フレーミングにもおすすめ。', soldOut: false, isNew: false },
+      { id: 'PMGB-2618', name: 'ブリキの小さな車 消防車', nameEn: 'Petite voiture de pompier en fer-blanc', category: 'toys', price: 4200, salePrice: 2100, image: 'https://picsum.photos/seed/pmgb-toy1/400/400', description: 'ブリキ製の小さな消防車。1960年代頃のフランス製。', soldOut: false, isNew: false },
+      { id: 'PMGB-2619', name: '古い木製ドミノ 箱入り', nameEn: 'Jeu de dominos en bois dans sa boîte', category: 'toys', price: 3800, salePrice: null, image: 'https://picsum.photos/seed/pmgb-domino/400/400', description: '木箱入りの古いドミノセット。すべてのピースが揃っています。', soldOut: false, isNew: true },
+      { id: 'PMGB-2620', name: 'アンティーク エナメルの番号プレート 24', nameEn: 'Plaque émaillée numéro 24', category: 'accessories', price: 5500, salePrice: 2750, image: 'https://picsum.photos/seed/pmgb-plate24/400/400', description: 'フランスの古いエナメル番号プレート。青地に白文字。', soldOut: false, isNew: false },
+      { id: 'PMGB-2621', name: '古い鉄製の大きな鍵 3本', nameEn: 'Lot de 3 grandes clés en fer', category: 'accessories', price: 4800, salePrice: null, image: 'https://picsum.photos/seed/pmgb-keys/400/400', description: '装飾的な古い鉄製の鍵3本セット。ディスプレイに最適。', soldOut: false, isNew: false },
+      { id: 'PMGB-2622', name: 'ピシェ 白い陶器の水差し', nameEn: 'Pichet en faïence blanche', category: 'tableware', price: 6800, salePrice: 3400, image: 'https://picsum.photos/seed/pmgb-pitcher/400/400', description: '白い陶器のピシェ（水差し）。シンプルで上品な佇まい。', soldOut: false, isNew: false },
+      { id: 'PMGB-2623', name: 'グレモン錠 アンティーク ドアハンドル', nameEn: 'Crémone ancienne', category: 'furniture', price: 15000, salePrice: null, image: 'https://picsum.photos/seed/pmgb-handle/400/400', description: 'フランスの古いグレモン錠（ドアハンドル）。真鍮と鉄の組み合わせ。', soldOut: true, isNew: false },
+      { id: 'PMGB-2624', name: 'アンティーク ティン缶 Pastilles', nameEn: 'Boîte en fer-blanc Pastilles', category: 'accessories', price: 2500, salePrice: null, image: 'https://picsum.photos/seed/pmgb-tin/400/400', description: '古いティン缶。Pastillesの美しいリトグラフ。', soldOut: false, isNew: true },
+    ];
+
+    // ─── State ──────────────────────────────────────────────────────────
+    let cart = JSON.parse(localStorage.getItem('pmgb_cart') || '[]');
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    // ─── Category Labels ────────────────────────────────────────────────
+    const categoryLabels = {
+      bowl: 'カフェオレボウル',
+      tableware: '食器類',
+      cookware: '調理器具',
+      furniture: '家具',
+      accessories: '小物類',
+      sewing: 'ソーイング雑貨',
+      paper: '紙製品',
+      toys: 'おもちゃ',
+      sale: 'セール',
+    };
+
+    // ─── Format Price ───────────────────────────────────────────────────
+    function formatPrice(price) {
+      return '\u00A5' + price.toLocaleString('ja-JP');
+    }
+
+    // ─── Render Products ────────────────────────────────────────────────
+    function renderProducts(items) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+
+      if (items.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column:1/-1;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <h3>商品が見つかりませんでした</h3>
+            <p>別のキーワードやカテゴリをお試しください。</p>
+          </div>
+        `;
+        document.getElementById('resultsCount').textContent = '0件';
+        return;
+      }
+
+      document.getElementById('resultsCount').textContent = items.length + '件の商品';
+
+      items.forEach((product, index) => {
+        const card = document.createElement('div');
+        card.className = 'product-card' + (product.soldOut ? ' sold-out' : '');
+        card.dataset.id = product.id;
+        card.style.transitionDelay = (index * 50) + 'ms';
+
+        const displayPrice = product.salePrice || product.price;
+        const isSale = product.salePrice !== null;
+
+        let badges = '';
+        if (product.isNew) badges += '<span class="badge badge-new">NEW</span>';
+        if (isSale) badges += '<span class="badge badge-sale">50% OFF</span>';
+
+        card.innerHTML = `
+          <div class="product-image-wrap">
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
+            <div class="product-badge">${badges}</div>
+            ${!product.soldOut ? `
+            <div class="product-quick-add">
+              <button class="btn-add-cart" onclick="addToCart('${product.id}')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                カートに入れる
+              </button>
+            </div>` : ''}
+          </div>
+          <div class="product-body">
+            <div class="product-category-label">${categoryLabels[product.category] || product.category}</div>
+            <h3 class="product-name">${product.name}</h3>
+            <p class="product-name-en">${product.nameEn}</p>
+            <div class="product-price-wrap">
+              <span class="product-price ${isSale ? 'sale' : ''}">${formatPrice(displayPrice)}</span>
+              ${isSale ? `<span class="product-price-original">${formatPrice(product.price)}</span>` : ''}
+            </div>
+            <div class="product-id">${product.id}</div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      // Trigger visibility animation with IntersectionObserver
+      requestAnimationFrame(() => {
+        observeProducts();
+      });
+    }
+
+    // ─── IntersectionObserver ───────────────────────────────────────────
+    function observeProducts() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '50px' });
+
+      document.querySelectorAll('.product-card').forEach(card => {
+        observer.observe(card);
+      });
+    }
+
+    // ─── Filter & Search ────────────────────────────────────────────────
+    function getFilteredProducts() {
+      return products.filter(p => {
+        const matchesCategory = currentCategory === 'all'
+          || p.category === currentCategory
+          || (currentCategory === 'sale' && p.salePrice !== null);
+        const q = searchQuery.toLowerCase();
+        const matchesSearch = !q
+          || p.name.toLowerCase().includes(q)
+          || p.nameEn.toLowerCase().includes(q)
+          || p.description.toLowerCase().includes(q)
+          || p.id.toLowerCase().includes(q);
+        return matchesCategory && matchesSearch;
+      });
+    }
+
+    function filterCategory(category, btn) {
+      currentCategory = category;
+      document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderProducts(getFilteredProducts());
+    }
+
+    function sortProducts() {
+      const sorted = getFilteredProducts();
+      const sortBy = document.getElementById('sortSelect').value;
+      switch (sortBy) {
+        case 'price-asc':
+          sorted.sort((a, b) => (a.salePrice || a.price) - (b.salePrice || b.price));
+          break;
+        case 'price-desc':
+          sorted.sort((a, b) => (b.salePrice || b.price) - (a.salePrice || a.price));
+          break;
+        case 'name':
+          sorted.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
+          break;
+        default: // newest - new items first
+          sorted.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
+      }
+      renderProducts(sorted);
+    }
+
+    // ─── Cart ───────────────────────────────────────────────────────────
+    function saveCart() {
+      localStorage.setItem('pmgb_cart', JSON.stringify(cart));
+    }
+
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product || product.soldOut) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ id: productId, qty: 1 });
+      }
+      saveCart();
+      updateCartUI();
+      showToast(product.name + ' をカートに追加しました');
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      saveCart();
+      updateCartUI();
+    }
+
+    function updateQuantity(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) {
+        removeFromCart(productId);
+        return;
+      }
+      saveCart();
+      updateCartUI();
+    }
+
+    function calculateTotal() {
+      return cart.reduce((total, item) => {
+        const product = products.find(p => p.id === item.id);
+        if (!product) return total;
+        const price = product.salePrice || product.price;
+        return total + price * item.qty;
+      }, 0);
+    }
+
+    function updateCartUI() {
+      const badge = document.getElementById('cartBadge');
+      const itemsContainer = document.getElementById('cartItems');
+      const footer = document.getElementById('cartFooter');
+      const totalEl = document.getElementById('cartTotal');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      badge.textContent = totalItems > 0 ? totalItems : '';
+
+      if (cart.length === 0) {
+        itemsContainer.innerHTML = `
+          <div class="cart-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <p>カートは空です</p>
+          </div>
+        `;
+        footer.style.display = 'none';
+        return;
+      }
+
+      footer.style.display = 'block';
+      totalEl.textContent = formatPrice(calculateTotal());
+
+      itemsContainer.innerHTML = cart.map(item => {
+        const product = products.find(p => p.id === item.id);
+        if (!product) return '';
+        const price = product.salePrice || product.price;
+        return `
+          <div class="cart-item">
+            <img class="cart-item-image" src="${product.image}" alt="${product.name}">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${product.name}</div>
+              <div class="cart-item-price">${formatPrice(price)}</div>
+              <div class="cart-item-qty">
+                <button class="qty-btn" onclick="updateQuantity('${product.id}', -1)">-</button>
+                <span class="qty-value">${item.qty}</span>
+                <button class="qty-btn" onclick="updateQuantity('${product.id}', 1)">+</button>
+              </div>
+              <button class="cart-item-remove" onclick="removeFromCart('${product.id}')">削除</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleCart() {
+      const overlay = document.getElementById('cartOverlay');
+      const drawer = document.getElementById('cartDrawer');
+      const isOpen = drawer.classList.contains('active');
+      if (isOpen) {
+        overlay.classList.remove('active');
+        drawer.classList.remove('active');
+        document.body.style.overflow = '';
+      } else {
+        overlay.classList.add('active');
+        drawer.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    // ─── Mobile Menu ────────────────────────────────────────────────────
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const hamburger = document.getElementById('hamburger');
+      const isOpen = menu.classList.contains('active');
+      menu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+      document.body.style.overflow = isOpen ? '' : 'hidden';
+    }
+
+    // ─── Toast ──────────────────────────────────────────────────────────
+    function showToast(message) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => {
+        if (toast.parentNode) toast.parentNode.removeChild(toast);
+      }, 3000);
+    }
+
+    // ─── Search debounce ────────────────────────────────────────────────
+    let searchTimeout;
+    document.getElementById('searchInput').addEventListener('input', function (e) {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        searchQuery = e.target.value.trim();
+        renderProducts(getFilteredProducts());
+      }, 300);
+    });
+
+    // ─── Init ───────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', function () {
+      renderProducts(products);
+      updateCartUI();
+    });
+  </script>
+</body>
+</html>

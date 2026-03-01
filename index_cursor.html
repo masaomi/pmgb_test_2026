@@ -754,24 +754,106 @@
         gap: .1rem;
         border-top: 1px solid #4a3020;
       }
-      .header-nav.open a { font-size: 13px; padding: .5rem; border-bottom: 1px solid #333; }
-      .hamburger { display: flex; }
+      .header-nav.open a {
+        font-size: 14px;
+        padding: .65rem .5rem;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid #333;
+      }
+      .hamburger {
+        display: flex;
+        min-width: 44px;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        padding: .5rem;
+      }
       .main-wrap {
         grid-template-columns: 1fr;
         padding: 0 1rem;
       }
-      .sidebar { order: 2; }
-      .sidebar-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+      .sidebar {
+        order: 2;
         gap: .75rem;
       }
+      .sidebar-card { padding: .85rem; }
+      .sidebar-card p { font-size: 13px; }
+      .sidebar-card h3 { font-size: 12.5px; }
+      .sidebar-links a {
+        padding: .55rem .2rem;
+        font-size: 13px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+      }
+      .payment-icon-item {
+        font-size: 13px;
+        padding: .45rem .6rem;
+        min-height: 44px;
+        align-items: center;
+      }
       .product-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+      .page-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 14px;
+      }
+      .page-btn.prev-next { width: auto; padding: 0 1rem; }
+      .cart-btn {
+        min-height: 44px;
+        padding: .45rem 1rem;
+        font-size: 13px;
+      }
+      .btn-cart {
+        min-height: 44px;
+        padding: .55rem;
+        font-size: 13px;
+      }
+      .cat-btn {
+        padding: .5rem 1rem;
+        font-size: 13px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+      }
+      .cat-label { font-size: 12px; }
+      body { font-size: 15px; }
+      .product-name { font-size: 13px; }
+      .product-id { font-size: 11px; }
+      .product-weight { font-size: 11.5px; }
+      .notice-bar-inner { font-size: 13px; }
+      .hero-subtitle { font-size: 14px; }
+      .hero-meta { font-size: 13px; }
+      .update-schedule { font-size: 13px; }
+      .update-schedule .holiday { font-size: 12px; }
+      .exchange-rate .rate-note { font-size: 12px; }
+      .footer-col a { font-size: 13px; }
+      .footer-bottom { font-size: 12px; }
+      .view-all-link { font-size: 13px; min-height: 44px; display: inline-flex; align-items: center; }
+    }
+
+    @media (max-width: 600px) {
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: .85rem; }
+      .hero { padding: 2.2rem 1rem 1.8rem; }
+      .hero-meta { gap: .75rem; }
+      .hero-meta-item { padding: .5rem .75rem; font-size: 12.5px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .modal { max-width: 95vw; }
     }
 
     @media (max-width: 480px) {
       .product-grid { grid-template-columns: repeat(2, 1fr); gap: .75rem; }
       .hero { padding: 2rem 1rem 1.5rem; }
+      .hero-meta { flex-direction: column; align-items: center; gap: .5rem; }
+      .hero-meta-item { width: 100%; text-align: center; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .product-name { font-size: 13px; }
+      .product-info { padding: .55rem .65rem .65rem; }
+      .section-title { font-size: 15px; }
+      .section-title .count { font-size: 12px; }
+      .badge { font-size: 10px; }
     }
   </style>
 </head>

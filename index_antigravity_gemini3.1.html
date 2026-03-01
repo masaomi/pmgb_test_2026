@@ -53,7 +53,7 @@
 
         .section-title {
             text-align: center;
-            font-size: 2rem;
+            font-size: clamp(20px, 4vw, 32px);
             margin-bottom: 2rem;
             font-weight: 600;
             letter-spacing: 0.1em;
@@ -106,7 +106,7 @@
         }
 
         .logo-area h1 {
-            font-size: 2.5rem;
+            font-size: clamp(24px, 5vw, 40px);
             font-weight: 400;
             color: var(--primary-color);
             letter-spacing: 0.05em;
@@ -125,8 +125,11 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            padding-bottom: 5px;
+            padding: 10px 4px 5px;
             position: relative;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
         }
 
         nav a::after {
@@ -302,9 +305,9 @@
 
         .pagination a {
             display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
+            width: 44px;
+            height: 44px;
+            line-height: 44px;
             text-align: center;
             border: 1px solid var(--border-color);
             border-radius: 50%;
@@ -345,7 +348,14 @@
         }
 
         .footer-section ul li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            display: inline-block;
+            padding: 6px 0;
+            min-height: 44px;
+            line-height: 1.6;
         }
 
         .footer-section a {
@@ -399,6 +409,121 @@
             visibility: visible;
         }
 
+        /* Hamburger Menu Button - hidden on desktop */
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 200;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .hamburger-box {
+            width: 28px;
+            height: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hamburger-line {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        /* Hamburger animation when open */
+        .hamburger.is-active .hamburger-line:nth-child(1) {
+            transform: translateY(10px) rotate(45deg);
+        }
+
+        .hamburger.is-active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.is-active .hamburger-line:nth-child(3) {
+            transform: translateY(-10px) rotate(-45deg);
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 149;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.is-visible {
+            opacity: 1;
+        }
+
+        /* Mobile Navigation Menu */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 320px;
+            height: 100%;
+            background-color: #fff;
+            z-index: 150;
+            padding: 80px 0 40px;
+            overflow-y: auto;
+            box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+            transition: right 0.3s ease;
+        }
+
+        .mobile-nav.is-open {
+            right: 0;
+        }
+
+        .mobile-nav a {
+            display: block;
+            padding: 14px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--border-color);
+            min-height: 44px;
+            line-height: 1.4;
+        }
+
+        .mobile-nav a:hover,
+        .mobile-nav a:active {
+            background-color: var(--secondary-color);
+            color: var(--accent-color);
+        }
+
+        .mobile-nav .mobile-lang-switch {
+            padding: 20px 30px;
+        }
+
+        .mobile-nav .mobile-lang-switch a {
+            display: inline-block;
+            padding: 10px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            min-height: 44px;
+            line-height: 1.4;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .header-top {
@@ -406,16 +531,160 @@
                 gap: 10px;
                 text-align: center;
             }
+
+            .logo-area {
+                position: relative;
+            }
+
             .logo-area h1 {
-                font-size: 2rem;
+                font-size: clamp(24px, 5vw, 40px);
             }
-            nav {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
+
+            /* Show hamburger, hide desktop nav */
+            .hamburger {
+                display: block;
             }
+
+            nav.desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu-overlay {
+                display: block;
+            }
+
+            .mobile-nav {
+                display: block;
+            }
+
             .section-title {
-                font-size: 1.5rem;
+                font-size: clamp(20px, 4vw, 32px);
+            }
+
+            /* Touch targets: nav links, pagination, buttons */
+            .header-top .lang-switch a {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+                min-height: 44px;
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .pagination a {
+                width: 44px;
+                height: 44px;
+                line-height: 44px;
+            }
+
+            .pagination span {
+                line-height: 44px !important;
+            }
+
+            .btn {
+                min-height: 44px;
+                padding: 12px 20px;
+            }
+
+            /* Reduce grid gap */
+            .products-grid {
+                gap: 20px;
+            }
+
+            .footer-content {
+                gap: 30px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .logo-area h1 {
+                font-size: clamp(20px, 5vw, 32px);
+                padding-right: 48px; /* space for hamburger */
+            }
+
+            .section-title {
+                font-size: clamp(18px, 4vw, 24px);
+            }
+
+            /* Tighter grid */
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 16px;
+            }
+
+            .product-info {
+                padding: 14px;
+            }
+
+            .product-title {
+                font-size: 1rem;
+            }
+
+            .product-price {
+                font-size: 1.1rem;
+            }
+
+            /* Hero / info board */
+            .hero-banner {
+                padding: 30px 0;
+                margin-bottom: 24px;
+            }
+
+            .info-board {
+                padding: 20px;
+            }
+
+            .update-info h2 {
+                font-size: 1.2rem;
+            }
+
+            .update-dates {
+                font-size: 1rem;
+            }
+
+            /* Footer tighter */
+            footer {
+                padding: 40px 0 16px;
+                margin-top: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            /* Pagination */
+            .pagination {
+                gap: 6px;
+            }
+
+            .pagination a {
+                width: 44px;
+                height: 44px;
+                line-height: 44px;
+                font-size: 0.9rem;
+            }
+
+            /* Catchphrase font */
+            .header-top .catchphrase {
+                font-size: 0.8rem;
+                line-height: 1.5;
+            }
+
+            header {
+                padding: 14px 0;
+            }
+
+            .header-top {
+                margin-bottom: 10px;
+            }
+
+            .logo-area {
+                margin-bottom: 10px;
             }
         }
     </style>
@@ -433,8 +702,15 @@
             </div>
             <div class="logo-area">
                 <h1>Petit mignon Grand beau</h1>
+                <button class="hamburger" id="hamburgerBtn" aria-label="メニューを開く" aria-expanded="false">
+                    <span class="hamburger-box">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </span>
+                </button>
             </div>
-            <nav>
+            <nav class="desktop-nav">
                 <a href="#new-arrivals">新着商品</a>
                 <a href="#">全商品一覧</a>
                 <a href="#">SALE (ワゴンセール)</a>
@@ -445,6 +721,23 @@
             </nav>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <a href="#new-arrivals">新着商品</a>
+        <a href="#">全商品一覧</a>
+        <a href="#">SALE (ワゴンセール)</a>
+        <a href="#">初めてのお客様へ</a>
+        <a href="#">ご利用案内</a>
+        <a href="#">お問い合わせ</a>
+        <a href="#">ブログ</a>
+        <div class="mobile-lang-switch">
+            <a href="https://www.etsy.com/shop/PetitMignonGrandBeau/" target="_blank">ENGLISH (Etsy)</a>
+        </div>
+    </nav>
 
     <!-- Hero / Info Section -->
     <section class="hero-banner">
@@ -566,7 +859,7 @@
                 <a href="#">3</a>
                 <a href="#">4</a>
                 <a href="#">5</a>
-                <span style="line-height: 40px;">...</span>
+                <span style="line-height: 44px;">...</span>
                 <a href="#">10</a>
                 <a href="#" style="width: auto; padding: 0 15px; border-radius: 20px;">NEXT ></a>
             </div>
@@ -650,6 +943,49 @@
             alert(`商品ID: ${productId} の詳細ページを開きます。\n(※これはモックアップのため実際の遷移はしません)`);
         }
         
+        // Hamburger menu toggle
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function openMobileMenu() {
+            hamburgerBtn.classList.add('is-active');
+            hamburgerBtn.setAttribute('aria-expanded', 'true');
+            mobileNav.classList.add('is-open');
+            mobileOverlay.classList.add('is-visible');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            hamburgerBtn.classList.remove('is-active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            mobileNav.classList.remove('is-open');
+            mobileOverlay.classList.remove('is-visible');
+            document.body.style.overflow = '';
+        }
+
+        hamburgerBtn.addEventListener('click', () => {
+            if (mobileNav.classList.contains('is-open')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+
+        mobileOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu when a link is clicked
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close mobile menu on resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
+            }
+        });
+
         // Add subtle animation to new products on load
         document.addEventListener('DOMContentLoaded', () => {
             const cards = document.querySelectorAll('.product-card');
@@ -657,7 +993,7 @@
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                
+
                 setTimeout(() => {
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
